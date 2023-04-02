@@ -6,4 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".profile.ProfileActivity">
 
+    <Button
+        android:id="@+id/login_link"
+        android:layout_width="97dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="180dp"
+        android:layout_marginBottom="104dp"
+        android:text="login"
+        app:layout_constraintBottom_toTopOf="@+id/profile_link"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/profile_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="180dp"
+        android:layout_marginBottom="164dp"
+        android:text="profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/register_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="172dp"
+        android:layout_marginBottom="128dp"
+        android:onClick="goToRegister"
+        android:text="Register"
+        app:layout_constraintBottom_toTopOf="@+id/login_link"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
