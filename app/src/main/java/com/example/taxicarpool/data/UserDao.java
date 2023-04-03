@@ -22,6 +22,7 @@ public interface UserDao {
             "lastName LIKE :last LIMIT 1")
     UserIdentity findByName(String first, String last);
 
+
     @Insert
     void insertAll(UserIdentity... users);
 

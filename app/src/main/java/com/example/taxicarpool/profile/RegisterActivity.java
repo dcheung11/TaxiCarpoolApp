@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.example.taxicarpool.R;
 import com.example.taxicarpool.data.AppDatabase;
+import com.example.taxicarpool.data.EncryptionController;
 import com.example.taxicarpool.data.UserDao;
 import com.example.taxicarpool.data.UserIdentity;
 
@@ -34,28 +35,37 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void registerClick(View v){
+
+        if (valid()){
+            UserIdentity user = new UserIdentity(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), password.getText().toString());
+            EncryptionController encryptionController = EncryptionController.getInstance(getApplicationContext());
+            encryptionController.insertUser(user);
+            System.out.println(encryptionController.getAll());
+        }
+    }
+
+
+    boolean valid(){
+        boolean noError = true;
         if (isEmpty(firstName)){
             firstName.setError("First Name is Required");
+            noError = false;
         }
         if (isEmpty(lastName)){
             lastName.setError("Last Name is Required");
+            noError = false;
         }
 
         if (!isEmail(email)){
             email.setError("E-mail is Required");
+            noError = false;
         }
 
         if (!isPassword(password)){
             password.setError("Please enter a password that is at least 6 characters long");
+            noError = false;
         }
-
-        UserIdentity user = new UserIdentity(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), password.getText().toString());
-        AppDatabase db = AppDatabase.getInstance(getApplicationContext());
-        UserDao dao = db.Dao();
-        dao.insertAll(user);
-        System.out.println(user);
-        System.out.println(dao.getAll());
-
+        return noError;
     }
 
     boolean isEmail(EditText text) {
