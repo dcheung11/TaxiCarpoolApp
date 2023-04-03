@@ -1,6 +1,5 @@
 package com.example.taxicarpool.data;
 
-import android.app.Application;
 import android.content.Context;
 
 import java.util.List;
@@ -24,11 +23,15 @@ public class EncryptionController {
 
     public void insertUser(UserIdentity user){
         // insert encryption here
-        dao.insertAll(user);
+        dao.insertUser(user);
+    }
+
+    public void updateUser(UserIdentity user){
+        dao.updateUser(user);
     }
 
     public void deleteUser(UserIdentity user){
-        dao.delete(user);
+        dao.deleteUser(user);
     }
 
     public List<UserIdentity> getAll(){
