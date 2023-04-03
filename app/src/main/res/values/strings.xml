@@ -6,4 +6,6 @@
     <string name="homescreen_arrive">Arrive</string>
     <string name="homescreen_create">Create Carpool</string>
     <string name="homescreen_join">Join Carpool</string>
+    <string name="createscreen_scan">Scan Taxi Qr</string>
+
 </resources>
