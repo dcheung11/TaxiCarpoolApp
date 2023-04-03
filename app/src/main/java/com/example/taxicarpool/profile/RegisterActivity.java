@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.taxicarpool.R;
+import com.example.taxicarpool.data.AppDatabase;
+import com.example.taxicarpool.data.UserDao;
+import com.example.taxicarpool.data.UserIdentity;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -45,6 +48,13 @@ public class RegisterActivity extends AppCompatActivity {
         if (!isPassword(password)){
             password.setError("Please enter a password that is at least 6 characters long");
         }
+
+        UserIdentity user = new UserIdentity(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), password.getText().toString());
+        AppDatabase db = AppDatabase.getInstance(getApplicationContext());
+        UserDao dao = db.Dao();
+        dao.insertAll(user);
+        System.out.println(user);
+        System.out.println(dao.getAll());
 
     }
 
