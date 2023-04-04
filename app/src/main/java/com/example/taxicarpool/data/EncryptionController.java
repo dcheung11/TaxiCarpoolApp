@@ -21,9 +21,8 @@ public class EncryptionController {
         return instance;
     }
 
-    public void insertUser(UserIdentity user){
-        // insert encryption here
-        dao.insertUser(user);
+    public Long insertUser(UserIdentity user){
+        return dao.insertUser(user);
     }
 
     public void updateUser(UserIdentity user){

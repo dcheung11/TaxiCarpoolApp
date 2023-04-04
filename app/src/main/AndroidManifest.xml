@@ -14,6 +14,9 @@
         android:theme="@style/Theme.TaxiCarpool"
         tools:targetApi="31">
         <activity
+            android:name=".profile.EditActivity"
+            android:exported="false" />
+        <activity
             android:name=".profile.ProfileScreen"
             android:exported="false" />
         <activity

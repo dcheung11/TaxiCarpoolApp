@@ -49,26 +49,29 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="116dp"
+        android:onClick="logoff"
         android:text="Log Out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/profile_screen_edit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="116dp"
+        android:onClick="edit"
         android:text="Edit"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button2" />
+        app:layout_constraintEnd_toStartOf="@+id/profile_screen_delete_button" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/profile_screen_delete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="116dp"
+        android:onClick="delete"
         android:text="Delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/profile_screen_logout_button" />
