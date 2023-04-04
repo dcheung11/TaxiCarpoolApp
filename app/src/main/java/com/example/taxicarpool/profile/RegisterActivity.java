@@ -8,7 +8,9 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.taxicarpool.LoggedInUser;
 import com.example.taxicarpool.R;
 import com.example.taxicarpool.data.AppDatabase;
 import com.example.taxicarpool.data.EncryptionController;
@@ -40,7 +42,9 @@ public class RegisterActivity extends AppCompatActivity {
             UserIdentity user = new UserIdentity(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), password.getText().toString());
             EncryptionController encryptionController = EncryptionController.getInstance(getApplicationContext());
             encryptionController.insertUser(user);
-            System.out.println(encryptionController.getAll());
+            LoggedInUser.getInstance().login(user);
+            Toast.makeText(this, "Register Success", Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 
