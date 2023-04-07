@@ -11,15 +11,26 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.taxicarpool.R;
+import com.example.taxicarpool.data.Carpool;
+import com.example.taxicarpool.data.EncryptionController;
+import com.example.taxicarpool.data.UserIdentity;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
 public class MapDestinationActivity extends AppCompatActivity implements OnMapReadyCallback {
+
+    EditText currentLocation;
+    EditText destination;
+    Button button_create;
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -53,10 +64,26 @@ public class MapDestinationActivity extends AppCompatActivity implements OnMapRe
             textview_match_id.setText("Match ID: " + matchId);
 
         }
+        currentLocation = findViewById(R.id.currentLocation);
+        destination = findViewById(R.id.destination);
+        button_create = findViewById(R.id.button_create);
 
         getLocationPermission();
     }
 
+    public void handleCreate(View v){
+        float f = 10;
+         Carpool carpool = new Carpool(Long.parseLong(matchId), currentLocation.getText().toString(), destination.getText().toString(),f);
+//         EncryptionController encryptionController = EncryptionController.getInstance(getApplicationContext());
+//         encryptionController.insertUser(carpool);
+//         System.out.println(encryptionController.getAll());
+        System.out.println(carpool.getMatchId());
+        System.out.println(carpool.getCurrentLocation());
+        System.out.println(carpool.getDestination());
+        System.out.println(carpool.getDistance());
+
+
+    }
     private void initMap(){
         Log.d(TAG, "initMap: initializing map");
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
