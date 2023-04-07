@@ -53,6 +53,6 @@ public interface UserDao {
     void deleteCarpool(Carpool... carpool);
 
     @Transaction
-    @Query("SELECT * FROM carpool WHERE matchId=(:matchId)")
-    List<CarpoolWithRiders> getCarpoolWithRiders(Long matchId);
+    @Query("SELECT * FROM carpool WHERE matchId=(:matchId) LIMIT 1")
+    CarpoolWithRiders getCarpoolWithRiders(Long matchId);
 }

@@ -26,6 +26,10 @@ public class EncryptionController {
         return dao.insertUser(user);
     }
 
+    public void insertCarpool(Carpool carpool){
+        dao.insertCarpool(carpool);
+    }
+
     public void updateUser(UserIdentity user){
         dao.updateUser(user);
     }
@@ -43,10 +47,13 @@ public class EncryptionController {
        return dao.findByName(firstName,lastName);
     }
 
-//    public void insertCarpool(Carpool carpool){
-//        // insert encryption here
-//        dao.insertAll(carpool);
-//    }
+    public void insertCarpoolRef(CarpoolUserCrossRef ref){
+        dao.insertCarpoolUserRef(ref);
+    }
+
+    public CarpoolWithRiders carpoolWithRiders(Long matchId){
+        return dao.getCarpoolWithRiders(matchId);
+    }
 
     public void encrypt(){
 
