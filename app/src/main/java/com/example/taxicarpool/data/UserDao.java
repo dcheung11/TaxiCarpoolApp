@@ -37,10 +37,14 @@ public interface UserDao {
     List<Carpool> loadAllCarpoolsByIds(int[] matchIds);
 
     @Query("SELECT * FROM Carpool WHERE matchId == :id")
-    Carpool findCarpoolById(int id);
+    Carpool findCarpoolById(Long id);
 
     @Insert
     void insertCarpool(Carpool... carpool);
+
+    @Insert
+    void insertCarpoolUserRef(CarpoolUserCrossRef ref);
+
 
     @Update
     void updateCarpool(Carpool... carpool);
@@ -49,6 +53,6 @@ public interface UserDao {
     void deleteCarpool(Carpool... carpool);
 
     @Transaction
-    @Query("SELECT * FROM carpool")
-    List<CarpoolWithRiders> getCarpoolWithRiders();
+    @Query("SELECT * FROM carpool WHERE matchId=(:matchId)")
+    List<CarpoolWithRiders> getCarpoolWithRiders(Long matchId);
 }

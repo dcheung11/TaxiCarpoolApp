@@ -15,4 +15,17 @@ public class CarpoolWithRiders {
             associateBy = @Junction(CarpoolUserCrossRef.class)
     )
     public List<UserIdentity> users;
+
+    public Carpool getCarpool() {
+        return carpool;
+    }
+
+    public void setCarpool(Carpool carpool) {
+        this.carpool = carpool;
+    }
+
+    public List<UserIdentity> getUsers() {
+        return users;
+    }
+
 }

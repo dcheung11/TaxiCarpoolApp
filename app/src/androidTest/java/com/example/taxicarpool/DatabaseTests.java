@@ -35,7 +35,7 @@ public class DatabaseTests {
     }
 
     @Test
-    public void writeAndRead(){
+    public void writeAndReadUser(){
         UserIdentity user = new UserIdentity(1, "Justin", "Dang", "testEmail@email.com","password");
         Long id = userDao.insertUser(user);
         assert user.getUid()==id;

@@ -3,6 +3,8 @@ package com.example.taxicarpool.data;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Objects;
+
 @Entity
 public class Carpool {
 
@@ -41,5 +43,27 @@ public class Carpool {
 
     public void setDistance(Float distance) {
         this.distance = distance;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Carpool carpool = (Carpool) o;
+        return matchId.equals(carpool.matchId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(matchId);
+    }
+
+    @Override
+    public String toString() {
+        return "Carpool{" +
+                "matchId=" + matchId +
+                ", destination='" + destination + '\'' +
+                ", distance=" + distance +
+                '}';
     }
 }
