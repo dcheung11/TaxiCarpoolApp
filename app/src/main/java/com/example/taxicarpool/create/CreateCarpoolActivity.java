@@ -5,8 +5,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.taxicarpool.MainActivity;
 import com.example.taxicarpool.R;
@@ -16,6 +20,9 @@ import com.journeyapps.barcodescanner.ScanOptions;
 
 public class CreateCarpoolActivity extends AppCompatActivity {
     Button button_scan;
+    EditText taxi_id_input;
+    Button button_submit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +31,9 @@ public class CreateCarpoolActivity extends AppCompatActivity {
         button_scan.setOnClickListener(v -> {
             scanCode();
         });
+        button_submit = findViewById(R.id.button_submit);
+        taxi_id_input = findViewById(R.id.taxi_id_input);
+
     }
 
     protected void scanCode() {
@@ -33,6 +43,31 @@ public class CreateCarpoolActivity extends AppCompatActivity {
         options.setOrientationLocked(true);
         options.setCaptureActivity(CaptureAct.class);
         launcher.launch(options);
+    }
+    public void handleSubmit(View v){
+        System.out.println("Ok");
+        if (isValidId()) {
+            Intent i = new Intent(this, MapDestinationActivity.class);
+            startActivity(i);
+        }
+
+    }
+
+    boolean isValidId(){
+        String s = taxi_id_input.getText().toString();
+
+        if (isEmpty(taxi_id_input) ){
+            taxi_id_input.setError("Taxi ID Required");
+//            System.out.println(s + " is INVALID ");
+            return false;
+        }
+//        System.out.println(s + " is VALID ");
+        return true;
+    }
+
+    boolean isEmpty(EditText text){
+        CharSequence input = text.getText().toString();
+        return TextUtils.isEmpty(input);
     }
 
     ActivityResultLauncher<ScanOptions> launcher = registerForActivityResult(new ScanContract(), result -> {
