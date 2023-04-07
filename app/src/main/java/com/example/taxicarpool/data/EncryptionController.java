@@ -11,6 +11,7 @@ public class EncryptionController {
     private static UserDao dao;
 
 
+
     public static synchronized EncryptionController getInstance(Context context) {
 
         if (instance == null) {
@@ -41,6 +42,11 @@ public class EncryptionController {
         // insert encryption here
        return dao.findByName(firstName,lastName);
     }
+
+//    public void insertCarpool(Carpool carpool){
+//        // insert encryption here
+//        dao.insertAll(carpool);
+//    }
 
     public void encrypt(){
 

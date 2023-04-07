@@ -33,7 +33,7 @@
         app:layout_constraintVertical_bias="0.5" />
 
     <EditText
-        android:id="@+id/editTextNumber3"
+        android:id="@+id/taxi_id_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -57,16 +57,17 @@
         app:layout_constraintTop_toBottomOf="@+id/view" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button_submit"
         android:layout_width="180dp"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
+        android:onClick="handleSubmit"
         android:text="@string/createscreen_submitprompt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber3"
+        app:layout_constraintTop_toBottomOf="@+id/taxi_id_input"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView

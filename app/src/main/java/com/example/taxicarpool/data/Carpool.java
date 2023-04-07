@@ -10,13 +10,14 @@ public class Carpool {
 
     @PrimaryKey
     public Long matchId;
-
+    public String currentLocation;
     public String destination;
 
     public Float distance;
 
-    public Carpool(Long matchId, String destination, Float distance) {
+    public Carpool(Long matchId, String currentLocation, String destination, Float distance) {
         this.matchId = matchId;
+        this.currentLocation = currentLocation;
         this.destination = destination;
         this.distance = distance;
     }
@@ -27,6 +28,15 @@ public class Carpool {
 
     public void setMatchId(Long matchId) {
         this.matchId = matchId;
+    }
+
+
+    public String getCurrentLocation() {
+        return currentLocation;
+    }
+
+    public void setCurrentLocation(String currentLocation) {
+        this.currentLocation = currentLocation;
     }
 
     public String getDestination() {
