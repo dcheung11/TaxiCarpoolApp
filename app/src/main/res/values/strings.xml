@@ -10,5 +10,11 @@
     <string name="createscreen_title">Input Taxi ID</string>
     <string name="createscreen_clickprompt">Click here!</string>
     <string name="createscreen_submitprompt">Submit</string>
+    <string name="profile_screen_logout_button">Log Out</string>
+    <string name="profile_screen_delete_button">Delete</string>
+    <string name="profile_screen_edit_button">Edit</string>
+    <string name="login_link">Login</string>
+    <string name="register_link">Register</string>
+    <string name="profile_link">Profile</string>
 
 </resources>
