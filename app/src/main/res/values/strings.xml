@@ -16,5 +16,11 @@
     <string name="login_link">Login</string>
     <string name="register_link">Register</string>
     <string name="profile_link">Profile</string>
+    <string name="edit_old_password">Old Password</string>
+    <string name="edit_complete_button">Edit</string>
+    <string name="edit_new_password">New Password</string>
+    <string name="edit_text_email">Email</string>
+    <string name="edit_first_name">First Name</string>
+    <string name="edit_last_name">Last Name</string>
 
 </resources>

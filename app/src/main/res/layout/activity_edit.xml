@@ -13,8 +13,10 @@
         android:layout_marginStart="76dp"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="Old Password"
+        android:hint="@string/edit_old_password"
+        android:importantForAccessibility="no"
         android:inputType="textPassword"
+        android:importantForAutofill="no"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_new_password" />
 
@@ -25,7 +27,7 @@
         android:layout_marginStart="148dp"
         android:layout_marginTop="28dp"
         android:onClick="editClick"
-        android:text="Edit"
+        android:text="@string/edit_complete_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_old_password" />
 
@@ -36,8 +38,9 @@
         android:layout_marginStart="76dp"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="First Name"
+        android:hint="@string/edit_first_name"
         android:inputType="textPersonName"
+        android:importantForAutofill="no"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,8 +51,10 @@
         android:layout_marginStart="76dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Last Name"
+        android:hint="@string/edit_last_name"
+        android:importantForAccessibility="no"
         android:inputType="textPersonName"
+        android:importantForAutofill="no"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_first_name" />
 
@@ -60,8 +65,9 @@
         android:layout_marginStart="76dp"
         android:layout_marginTop="44dp"
         android:ems="10"
-        android:hint="Email"
+        android:hint="@string/edit_text_email"
         android:inputType="textEmailAddress"
+        android:importantForAutofill="no"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_last_name" />
 
@@ -72,7 +78,9 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="40dp"
         android:ems="10"
-        android:hint="New Password"
+        android:hint="@string/edit_new_password"
+        android:importantForAccessibility="no"
+        android:importantForAutofill="no"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_text_email" />
