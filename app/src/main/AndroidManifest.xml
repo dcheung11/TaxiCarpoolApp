@@ -26,6 +26,15 @@
             android:name=".arrive.ArrivalActivity"
             android:exported="false" />
         <activity
+            android:name=".create.MapDestinationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".profile.EditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".profile.ProfileScreen"
+            android:exported="false" />
+        <activity
             android:name=".profile.RegisterActivity"
             android:exported="false" />
         <activity
