@@ -7,9 +7,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.taxicarpool.R;
@@ -35,12 +37,22 @@ public class MapDestinationActivity extends AppCompatActivity implements OnMapRe
     //vars
     private Boolean mLocationPermissionsGranted = false;
     private GoogleMap mMap;
+    TextView textview_match_id;
+    String matchId;
 
+//    textViewMatchId.setText(matchId);
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_map_destination);
+        Intent i = getIntent();
+        textview_match_id = findViewById(R.id.textview_match_id);
+        if (i != null && i.hasExtra("MY_STRING_EXTRA")) {
+            matchId = i.getStringExtra("MY_STRING_EXTRA");
+            textview_match_id.setText("Match ID: " + matchId);
+
+        }
 
         getLocationPermission();
     }
