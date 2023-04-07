@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-<!--    package="com.usecambotutorial.sovary.qrscanner">-->
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <!-- package="com.usecambotutorial.sovary.qrscanner"> -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TaxiCarpool"
         tools:targetApi="31">
+        <activity
+            android:name=".profile.EditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".profile.ProfileScreen"
+            android:exported="false" />
         <activity
             android:name=".profile.RegisterActivity"
             android:exported="false" />
@@ -33,7 +40,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -53,9 +59,10 @@
             android:name=".arrive.MapsActivity"
             android:exported="true"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".create.CaptureAct"
+        <activity
+            android:name=".create.CaptureAct"
             android:stateNotNeeded="true"
-            android:theme="@style/zxing_CaptureTheme"/>
+            android:theme="@style/zxing_CaptureTheme" />
     </application>
 
 </manifest>

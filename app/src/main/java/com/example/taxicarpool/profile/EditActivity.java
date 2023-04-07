@@ -6,48 +6,48 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.taxicarpool.LoggedInUser;
 import com.example.taxicarpool.R;
-import com.example.taxicarpool.data.AppDatabase;
 import com.example.taxicarpool.data.EncryptionController;
-import com.example.taxicarpool.data.UserDao;
 import com.example.taxicarpool.data.UserIdentity;
 
-public class RegisterActivity extends AppCompatActivity {
+public class EditActivity extends AppCompatActivity {
 
     EditText firstName;
     EditText lastName;
     EditText email;
-    EditText password;
-    Button register;
+    EditText oldPassword;
+    EditText newPassword;
+
+    UserIdentity user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        firstName = findViewById(R.id.firstName);
-        lastName = findViewById(R.id.lastName);
-        email = findViewById(R.id.email);
-        password = findViewById(R.id.password);
-        register = findViewById(R.id.register);
+        setContentView(R.layout.activity_edit);
+        firstName = findViewById(R.id.edit_first_name);
+        lastName = findViewById(R.id.edit_last_name);
+        email = findViewById(R.id.edit_text_email);
+        oldPassword = findViewById(R.id.edit_old_password);
+        newPassword = findViewById(R.id.edit_new_password);
+        user = LoggedInUser.getInstance().getUser();
     }
 
-    public void registerClick(View v){
-
+    public void editClick(View v){
         if (valid()){
-            UserIdentity user = new UserIdentity(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), password.getText().toString());
-            EncryptionController encryptionController = EncryptionController.getInstance(getApplicationContext());
-            user.setUid(encryptionController.insertUser(user));
+            user.setFirstName(firstName.getText().toString());
+            user.setLastName(lastName.getText().toString());
+            user.setEmail(email.getText().toString());
+            user.setPassword(newPassword.getText().toString());
+            EncryptionController.getInstance(this).updateUser(user);
             LoggedInUser.getInstance().login(user);
-            Toast.makeText(this, "Register Success", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Edit Success", Toast.LENGTH_SHORT).show();
             finish();
         }
     }
-
 
     boolean valid(){
         boolean noError = true;
@@ -65,10 +65,16 @@ public class RegisterActivity extends AppCompatActivity {
             noError = false;
         }
 
-        if (!isPassword(password)){
-            password.setError("Please enter a password that is at least 6 characters long");
+        if (!checkPassword(oldPassword)){
+            oldPassword.setError("Passwords not the same");
             noError = false;
         }
+
+        if (!isPassword(newPassword)){
+            newPassword.setError("Please enter a password that is at least 6 characters long");
+            noError = false;
+        }
+
         return noError;
     }
 
@@ -86,4 +92,13 @@ public class RegisterActivity extends AppCompatActivity {
         CharSequence input = text.getText().toString();
         return TextUtils.isEmpty(input);
     }
+
+    boolean checkPassword(EditText text){
+        String passwordCheck = text.getText().toString();
+        String password = user.getPassword();
+        return password.equals(passwordCheck);
+    }
+
+
+
 }

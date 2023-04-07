@@ -5,6 +5,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.util.Objects;
+
 @Entity
 public class UserIdentity {
     @PrimaryKey (autoGenerate = true)
@@ -74,6 +76,19 @@ public class UserIdentity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserIdentity that = (UserIdentity) o;
+        return uid == that.uid;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(uid);
     }
 
     @Override

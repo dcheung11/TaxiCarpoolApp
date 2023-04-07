@@ -11,8 +11,21 @@ public class CarpoolWithRiders {
     @Embedded public Carpool carpool;
     @Relation(
             parentColumn = "matchId",
-            entityColumn = "userId",
+            entityColumn = "uid",
             associateBy = @Junction(CarpoolUserCrossRef.class)
     )
     public List<UserIdentity> users;
+
+    public Carpool getCarpool() {
+        return carpool;
+    }
+
+    public void setCarpool(Carpool carpool) {
+        this.carpool = carpool;
+    }
+
+    public List<UserIdentity> getUsers() {
+        return users;
+    }
+
 }
