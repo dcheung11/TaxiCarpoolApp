@@ -34,6 +34,14 @@ public class EncryptionController {
         dao.deleteUser(user);
     }
 
+    public void insertCarpool(Carpool carpool){
+         dao.insertCarpool(carpool);
+    }
+
+    public List<Carpool> getAllCarpool(){
+        return dao.getAllCarpool();
+    }
+
     public List<UserIdentity> getAll(){
         return dao.getAll();
     }

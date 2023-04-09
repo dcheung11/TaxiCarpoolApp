@@ -73,14 +73,15 @@ public class MapDestinationActivity extends AppCompatActivity implements OnMapRe
 
     public void handleCreate(View v){
         float f = 10;
-         Carpool carpool = new Carpool(Long.parseLong(matchId), currentLocation.getText().toString(), destination.getText().toString(),f);
-//         EncryptionController encryptionController = EncryptionController.getInstance(getApplicationContext());
-//         encryptionController.insertUser(carpool);
-//         System.out.println(encryptionController.getAll());
-        System.out.println(carpool.getMatchId());
-        System.out.println(carpool.getCurrentLocation());
-        System.out.println(carpool.getDestination());
-        System.out.println(carpool.getDistance());
+        Carpool carpool = new Carpool(Long.parseLong(matchId), currentLocation.getText().toString(), destination.getText().toString(),f);
+        EncryptionController encryptionController = EncryptionController.getInstance(getApplicationContext());
+        encryptionController.insertCarpool(carpool);
+        System.out.println(encryptionController.getAllCarpool());
+
+//        System.out.println(carpool.getMatchId());
+//        System.out.println(carpool.getCurrentLocation());
+//        System.out.println(carpool.getDestination());
+//        System.out.println(carpool.getDistance());
 
 
     }
