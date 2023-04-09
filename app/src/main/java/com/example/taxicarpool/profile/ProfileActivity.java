@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.taxicarpool.LoggedInUser;
 import com.example.taxicarpool.R;
+import com.example.taxicarpool.ui.login.LoginActivity;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -16,6 +17,11 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+    }
+
+    public void goToLogin(View v){
+        Intent i = new Intent(this, LoginActivity.class);
+        startActivity(i);
     }
 
     public void goToRegister(View v){

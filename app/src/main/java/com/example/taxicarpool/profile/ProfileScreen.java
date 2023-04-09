@@ -52,7 +52,7 @@ public class ProfileScreen extends AppCompatActivity {
         email.setText(field3);
     }
 
-    public void delete(View v){
+    public void delete(View v) throws Exception {
         LoggedInUser.getInstance().logoff();
         EncryptionController.getInstance(this).deleteUser(user);
         Toast.makeText(this, "Delete Success", Toast.LENGTH_SHORT).show();

@@ -20,20 +20,21 @@ public class UserIdentity {
 
     public String password;
 
+    public int rating;
+
     @Ignore
     public UserIdentity(String firstName, String lastName, String email, String password) {
-        this(0,firstName,lastName,email,password);
+        this(0L,firstName,lastName,email,password);
     }
 
-    public UserIdentity() {
-    }
 
-    public UserIdentity(int uid, String firstName, String lastName, String email, String password) {
+    public UserIdentity(Long uid, String firstName, String lastName, String email, String password) {
         this.uid = uid;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.rating = 5;
     }
 
 
@@ -76,6 +77,14 @@ public class UserIdentity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     @Override

@@ -19,7 +19,6 @@ public class Carpool {
         this.matchId = matchId;
         this.currentLocation = currentLocation;
         this.destination = destination;
-        this.distance = distance;
     }
 
     public Long getMatchId() {

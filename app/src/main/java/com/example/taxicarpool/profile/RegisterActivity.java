@@ -36,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
         register = findViewById(R.id.register);
     }
 
-    public void registerClick(View v){
+    public void registerClick(View v) throws Exception {
 
         if (valid()){
             UserIdentity user = new UserIdentity(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), password.getText().toString());
