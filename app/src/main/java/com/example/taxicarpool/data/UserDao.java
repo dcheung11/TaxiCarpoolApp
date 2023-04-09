@@ -33,6 +33,9 @@ public interface UserDao {
     @Delete
     void deleteUser(UserIdentity user);
 
+    @Query("SELECT * FROM carpool")
+    List<Carpool> getAllCarpool();
+
     @Query("SELECT * FROM carpool WHERE matchId in (:matchIds)")
     List<Carpool> loadAllCarpoolsByIds(int[] matchIds);
 
@@ -44,7 +47,6 @@ public interface UserDao {
 
     @Insert
     void insertCarpoolUserRef(CarpoolUserCrossRef ref);
-
 
     @Update
     void updateCarpool(Carpool... carpool);
