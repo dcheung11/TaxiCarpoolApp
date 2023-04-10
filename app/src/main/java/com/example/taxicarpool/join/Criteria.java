@@ -41,4 +41,15 @@ public class Criteria {
     public void setPets(boolean pets) {
         this.pets = pets;
     }
+
+    public String toString() {
+        return "Criteria{" +
+                "suv=" + suv +
+                ", sedan='" + sedan + '\'' +
+                ", truck=" + truck +
+                ", van=" + van +
+                ", gender" + gender +
+                ", pets" + pets +
+                '}';
+    }
 }

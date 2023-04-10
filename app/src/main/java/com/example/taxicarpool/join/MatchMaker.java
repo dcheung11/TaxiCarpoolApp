@@ -20,8 +20,15 @@ public class MatchMaker {
         return null;
     }
 
-//    public float calculateDistance(String userLocation, String carpoolLocation){
-//
+
+    // Get the filtered carpool results based on the search query
+    public List<Carpool> getCarpoolSearchResults(List<Carpool> carpool, Criteria criteria){
+        return carpool;
+    }
+
+
+    // Update the DB by adding a carpoolusercrossref and updating carpool
+    public void handleSelection(){
 //        return null;
-//    }
+    }
 }

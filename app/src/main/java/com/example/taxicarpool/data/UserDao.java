@@ -45,6 +45,9 @@ public interface UserDao {
     @Query("SELECT * FROM Carpool WHERE matchId == :id")
     Carpool findCarpoolById(Long id);
 
+    @Query("SELECT * FROM Carpool WHERE destination == :destination AND currentLocation == :currentLocation")
+    List<Carpool> findCarpoolByTrip(String currentLocation, String destination);
+
     @Insert
     void insertCarpool(Carpool... carpool);
 

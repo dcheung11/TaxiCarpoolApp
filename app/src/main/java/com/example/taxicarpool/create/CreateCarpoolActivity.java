@@ -12,9 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.taxicarpool.MainActivity;
 import com.example.taxicarpool.R;
-import com.journeyapps.barcodescanner.CaptureActivity;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
@@ -47,11 +45,15 @@ public class CreateCarpoolActivity extends AppCompatActivity {
     public void handleSubmit(View v){
         System.out.println("Ok");
         String s = taxi_id_input.getText().toString();
-        Intent intent = new Intent(this, MapsActivity.class);
+        Intent intent = new Intent(this, SelectAddressActivity.class);
 
-//        Intent intent = new Intent(this, MapDestinationActivity.class);
-//        intent.putExtra("MY_STRING_EXTRA", s);
-        startActivity(intent);
+//        Intent intent = new Intent(this, MapsActivity.class);
+        if (isValidId()) {
+//            Intent intent = new Intent(this, CarpoolDetailsInputActivity.class);
+            intent.putExtra("MY_STRING_EXTRA", s);
+            startActivity(intent);
+        }
+
 
 
     }
@@ -77,7 +79,7 @@ public class CreateCarpoolActivity extends AppCompatActivity {
         if (result.getContents() != null) {
             AlertDialog.Builder builder = new AlertDialog.Builder(CreateCarpoolActivity.this);
             builder.setTitle("Result");
-            builder.setMessage(result.getContents());
+            builder.setMessage("Your ID is: " + result.getContents());
             builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
