@@ -23,6 +23,9 @@ public interface UserDao {
             "lastName LIKE :last LIMIT 1")
     UserIdentity findByName(String first, String last);
 
+    @Query("SELECT * FROM useridentity WHERE email LIKE :email LIMIT 1")
+    UserIdentity findByEmail(String email);
+
 
     @Insert
     Long insertUser(UserIdentity user);

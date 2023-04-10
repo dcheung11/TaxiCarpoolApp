@@ -24,7 +24,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.taxicarpool.LoggedInUser;
 import com.example.taxicarpool.R;
+import com.example.taxicarpool.data.EncryptionController;
+import com.example.taxicarpool.data.UserIdentity;
 import com.example.taxicarpool.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
@@ -45,11 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (email.getText().toString().equals("hello") && password.getText().toString().equals("world")){
-                    Toast.makeText(LoginActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                }
+                login();
             }
         });
 
@@ -61,6 +60,25 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+    void login(){
+        if(valid()) {
+            UserIdentity loginAttempt;
+            try {
+                loginAttempt = EncryptionController.getInstance(this).findByEmail(email.getText().toString());
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "No user found", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (loginAttempt.getPassword().equals(password.getText().toString())){
+                LoggedInUser.getInstance().login(loginAttempt);
+                Toast.makeText(getApplicationContext(), "Login Success", Toast.LENGTH_SHORT).show();
+                finish();
+            } else{
+                password.setError("Password does not match");
+            }
+        }
     }
 
     boolean valid(){

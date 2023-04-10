@@ -36,8 +36,18 @@ public class EncryptionController {
             instance = new EncryptionController();
             db = AppDatabase.getInstance(context);
             dao = db.Dao();
+            initialize();
+
         }
         return instance;
+    }
+
+    public static void initialize(){
+        UserIdentity user1 = new UserIdentity("Justin","Dang","123@gmail.com","123456");
+        UserIdentity user2 = new UserIdentity("Justin","Dang","1234@gmail.com","123456");
+        dao.insertUser(user1);
+        dao.insertUser(user2);
+        Carpool carpool1 = new Carpool(1L,"Death","Death", 0.0F);
     }
 
     public Long insertUser(UserIdentity user){
@@ -64,9 +74,12 @@ public class EncryptionController {
         return dao.getAll();
     }
 
-    public UserIdentity findByName(String firstName, String lastName){
-        // insert encryption here
+    public UserIdentity findByName(String firstName, String lastName) throws Exception {
        return dao.findByName(firstName,lastName);
+    }
+
+    public UserIdentity findByEmail(String email) throws Exception {
+        return dao.findByEmail(decrypt(encrypt(email)));
     }
 
     public void insertCarpoolRef(CarpoolUserCrossRef ref){
