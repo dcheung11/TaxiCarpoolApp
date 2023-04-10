@@ -42,10 +42,6 @@ public class EncryptionController {
         return dao.insertUser(user);
     }
 
-    public void insertCarpool(Carpool carpool){
-        dao.insertCarpool(carpool);
-    }
-
     public void updateUser(UserIdentity user){
         dao.updateUser(user);
     }
