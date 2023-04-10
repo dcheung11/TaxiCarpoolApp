@@ -58,84 +58,33 @@ public class MapDestinationActivity extends AppCompatActivity implements OnMapRe
 
         setContentView(R.layout.activity_map_destination);
         Intent i = getIntent();
-        textview_match_id = findViewById(R.id.textview_match_id);
-        if (i != null && i.hasExtra("MY_STRING_EXTRA")) {
-            matchId = i.getStringExtra("MY_STRING_EXTRA");
-            textview_match_id.setText("Match ID: " + matchId);
+//        textview_match_id = findViewById(R.id.textview_match_id);
+//        if (i != null && i.hasExtra("MY_STRING_EXTRA")) {
+//            matchId = i.getStringExtra("MY_STRING_EXTRA");
+//            textview_match_id.setText("Match ID: " + matchId);
+//
+//        }
+//        currentLocation = findViewById(R.id.currentLocation);
+//        destination = findViewById(R.id.destination);
+//        button_create = findViewById(R.id.button_create);
 
-        }
-        currentLocation = findViewById(R.id.currentLocation);
-        destination = findViewById(R.id.destination);
-        button_create = findViewById(R.id.button_create);
-
-        getLocationPermission();
     }
 
-    public void handleCreate(View v){
+    public void handleCreate(View v) throws Exception{
         float f = 10;
-         Carpool carpool = new Carpool(Long.parseLong(matchId), currentLocation.getText().toString(), destination.getText().toString(),f);
-//         EncryptionController encryptionController = EncryptionController.getInstance(getApplicationContext());
-//         encryptionController.insertUser(carpool);
-//         System.out.println(encryptionController.getAll());
-        System.out.println(carpool.getMatchId());
-        System.out.println(carpool.getCurrentLocation());
-        System.out.println(carpool.getDestination());
-        System.out.println(carpool.getDistance());
+        Carpool carpool = new Carpool(Long.parseLong(matchId), currentLocation.getText().toString(), destination.getText().toString(),f);
+        EncryptionController encryptionController = EncryptionController.getInstance(getApplicationContext());
+        encryptionController.insertCarpool(carpool);
+        System.out.println(encryptionController.getAllCarpool());
+
+//        System.out.println(carpool.getMatchId());
+//        System.out.println(carpool.getCurrentLocation());
+//        System.out.println(carpool.getDestination());
+//        System.out.println(carpool.getDistance());
+        finish();
 
 
     }
-    private void initMap(){
-        Log.d(TAG, "initMap: initializing map");
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
-        mapFragment.getMapAsync(MapDestinationActivity.this);
-    }
-
-    private void getLocationPermission(){
-        Log.d(TAG, "getLocationPermission: getting location permissions");
-        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION};
-
-        if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-                mLocationPermissionsGranted = true;
-            }else{
-                ActivityCompat.requestPermissions(this,
-                        permissions,
-                        LOCATION_PERMISSION_REQUEST_CODE);
-            }
-        }else{
-            ActivityCompat.requestPermissions(this,
-                    permissions,
-                    LOCATION_PERMISSION_REQUEST_CODE);
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Log.d(TAG, "onRequestPermissionsResult: called.");
-        mLocationPermissionsGranted = false;
-
-        switch (requestCode) {
-            case LOCATION_PERMISSION_REQUEST_CODE: {
-                if (grantResults.length > 0) {
-                    for (int i = 0; i < grantResults.length; i++) {
-                        if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                            mLocationPermissionsGranted = false;
-                            Log.d(TAG, "onRequestPermissionsResult: permission failed");
-                            return;
-                        }
-                    }
-                    Log.d(TAG, "onRequestPermissionsResult: permission granted");
-                    mLocationPermissionsGranted = true;
-                    //initialize our map
-                    initMap();
-                }
-            }
-        }
-    }
 
 }

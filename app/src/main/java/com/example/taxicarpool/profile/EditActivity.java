@@ -36,7 +36,7 @@ public class EditActivity extends AppCompatActivity {
         user = LoggedInUser.getInstance().getUser();
     }
 
-    public void editClick(View v){
+    public void editClick(View v) throws Exception {
         if (valid()){
             user.setFirstName(firstName.getText().toString());
             user.setLastName(lastName.getText().toString());

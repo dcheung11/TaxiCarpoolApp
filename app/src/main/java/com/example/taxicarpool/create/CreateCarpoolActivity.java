@@ -47,9 +47,10 @@ public class CreateCarpoolActivity extends AppCompatActivity {
     public void handleSubmit(View v){
         System.out.println("Ok");
         String s = taxi_id_input.getText().toString();
+        Intent intent = new Intent(this, MapsActivity.class);
 
-        Intent intent = new Intent(this, MapDestinationActivity.class);
-        intent.putExtra("MY_STRING_EXTRA", s);
+//        Intent intent = new Intent(this, MapDestinationActivity.class);
+//        intent.putExtra("MY_STRING_EXTRA", s);
         startActivity(intent);
 
 
