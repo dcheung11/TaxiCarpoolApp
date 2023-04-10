@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <!-- package="com.usecambotutorial.sovary.qrscanner"> -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -17,7 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TaxiCarpool"
         tools:targetApi="31">
-
+        <activity
+            android:name=".create.SelectAddressActivity"
+            android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -31,7 +33,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-        android:value="${MAPS_API_KEY}" />
+            android:value="${MAPS_API_KEY}" />
 
         <activity
             android:name=".join.SearchResultsActivity"
@@ -59,7 +61,7 @@
             android:name=".arrive.ArrivalActivity"
             android:exported="false" />
         <activity
-            android:name=".create.MapDestinationActivity"
+            android:name=".create.CarpoolDetailsInputActivity"
             android:exported="false" />
         <activity
             android:name=".profile.EditActivity"
@@ -88,7 +90,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 

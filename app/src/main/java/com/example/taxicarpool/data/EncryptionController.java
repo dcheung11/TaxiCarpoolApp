@@ -2,6 +2,8 @@ package com.example.taxicarpool.data;
 
 import android.content.Context;
 
+import com.example.taxicarpool.join.Criteria;
+
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import javax.crypto.SecretKey;
@@ -70,6 +72,11 @@ public class EncryptionController {
     public void insertCarpoolRef(CarpoolUserCrossRef ref){
         dao.insertCarpoolUserRef(ref);
     }
+    public List<Carpool> findCarpoolByTrip(String location, String destination){
+        return dao.findCarpoolByTrip(location, destination);
+    }
+
+
 
     public CarpoolWithRiders carpoolWithRiders(Long matchId){
         return dao.getCarpoolWithRiders(matchId);

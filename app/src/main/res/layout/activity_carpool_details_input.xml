@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".create.CarpoolDetailsInputActivity">
+
+    <TextView
+        android:id="@+id/textview_match_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="174dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="175dp"
+        android:text="Match ID: "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <EditText
+        android:id="@+id/currentLocation"
+        android:layout_width="305dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="23dp"
+        android:ems="10"
+        android:hint="Current Location"
+        android:inputType="textPostalAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_match_id" />
+
+    <EditText
+        android:id="@+id/destination"
+        android:layout_width="305dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Destination"
+        android:inputType="textPostalAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currentLocation" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Carpool Details"
+        android:textSize="48sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkbox_gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="52dp"
+        android:text="Female-Only"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/destination" />
+
+    <CheckBox
+        android:id="@+id/checkBox_pets"
+        android:layout_width="104dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="57dp"
+        android:text="Pets"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/checkbox_gender"
+        app:layout_constraintTop_toBottomOf="@+id/checkbox_gender" />
+
+    <Button
+        android:id="@+id/button_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginBottom="50dp"
+        android:onClick="handleCreate"
+        android:text="Create"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <RadioGroup
+        android:id="@+id/vehicle_group"
+        android:layout_width="108dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="86dp"
+        app:layout_constraintEnd_toStartOf="@+id/checkbox_gender"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/destination">
+
+        <RadioButton
+            android:id="@+id/radio_sedan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sedan"
+            tools:layout_editor_absoluteX="90dp"
+            tools:layout_editor_absoluteY="503dp" />
+
+        <RadioButton
+            android:id="@+id/radio_suv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SUV"
+            tools:layout_editor_absoluteX="215dp"
+            tools:layout_editor_absoluteY="503dp" />
+
+        <RadioButton
+            android:id="@+id/radio_van"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Van"
+            tools:layout_editor_absoluteX="90dp"
+            tools:layout_editor_absoluteY="503dp" />
+
+        <RadioButton
+            android:id="@+id/radio_truck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Truck"
+            tools:layout_editor_absoluteX="90dp"
+            tools:layout_editor_absoluteY="503dp" />
+
+    </RadioGroup>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
