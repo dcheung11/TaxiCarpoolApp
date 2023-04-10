@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.taxicarpool.arrive.MapsActivity;
+import com.example.taxicarpool.arrive.ArrivalActivity;
 import com.example.taxicarpool.create.CreateCarpoolActivity;
 import com.example.taxicarpool.join.JoinCarpoolActivity;
 import com.example.taxicarpool.profile.ProfileActivity;
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openArrive(View v){
-        Intent i = new Intent(this,MapsActivity.class);
+        Intent i = new Intent(this,ArrivalActivity.class);
         startActivity(i);
     }
 

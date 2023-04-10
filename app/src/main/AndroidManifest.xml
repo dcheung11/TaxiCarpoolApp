@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <!-- package="com.usecambotutorial.sovary.qrscanner"> -->
-    <uses-permission android:name="android.permission.CAMERA" />
-
+<!--    package="com.usecambotutorial.sovary.qrscanner">-->
+    <uses-permission android:name="android.permission.CAMERA"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -21,6 +20,31 @@
             android:exported="false" />
         <activity
             android:name=".join.FindLocationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login" />
+        <activity
+            android:name=".arrive.RatePerson"
+            android:exported="false" />
+        <activity
+            android:name=".arrive.RatePassengers"
+            android:exported="false" />
+        <activity
+            android:name=".arrive.PayNow"
+            android:exported="false" />
+        <activity
+            android:name=".arrive.ArrivalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".create.MapDestinationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".profile.EditActivity"
+            android:exported="false" />
+        <activity
+            android:name=".profile.ProfileScreen"
             android:exported="false" />
         <activity
             android:name=".profile.RegisterActivity"
@@ -43,6 +67,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
