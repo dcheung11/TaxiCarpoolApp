@@ -35,13 +35,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openCreate(View v){
-        Intent i = new Intent(this, CreateCarpoolActivity.class);
-        startActivity(i);
+        if (!LoggedInUser.getInstance().isLoggedIn()) {
+            Toast.makeText(this, "Must be Logged In", Toast.LENGTH_SHORT).show();
+        } else{
+            Intent i = new Intent(this, CreateCarpoolActivity.class);
+            startActivity(i);
+        }
     }
 
     public void openJoin(View v){
-        Intent i = new Intent(this, JoinCarpoolActivity.class);
-        startActivity(i);
+        if (!LoggedInUser.getInstance().isLoggedIn()) {
+            Toast.makeText(this, "Must be Logged In", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent i = new Intent(this, JoinCarpoolActivity.class);
+            startActivity(i);
+        }
     }
 
 
