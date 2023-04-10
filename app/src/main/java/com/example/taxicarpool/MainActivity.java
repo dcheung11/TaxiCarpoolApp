@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.taxicarpool.arrive.ArrivalActivity;
 import com.example.taxicarpool.create.CreateCarpoolActivity;
@@ -25,8 +26,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openArrive(View v){
-        Intent i = new Intent(this,ArrivalActivity.class);
-        startActivity(i);
+        if (!LoggedInUser.getInstance().isLoggedIn()){
+            Toast.makeText(this, "Must be Logged In", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent i = new Intent(this,ArrivalActivity.class);
+            startActivity(i);
+        }
     }
 
     public void openCreate(View v){
@@ -38,12 +43,6 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, JoinCarpoolActivity.class);
         startActivity(i);
     }
-
-
-
-
-
-
 
 
 }
