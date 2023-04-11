@@ -44,12 +44,12 @@ public class EncryptionController {
 
     public static void initialize(){
         UserIdentity user1 = new UserIdentity("Justin","Dang","123@gmail.com","123456");
-        UserIdentity damien = new UserIdentity("Damien","Cheung","d@@gmail.com","123456");
-        UserIdentity userForCarpool1 = new UserIdentity("guy","1","1@@gmail.com","123456");
-        UserIdentity userForCarpool2 = new UserIdentity("guy","2","2@@gmail.com","123456");
-        UserIdentity userForCarpool3 = new UserIdentity("guy","3","3@@gmail.com","123456");
-        UserIdentity userForCarpool4 = new UserIdentity("guy","4","4@@gmail.com","123456");
-        UserIdentity userForCarpool5 = new UserIdentity("guy","5","5@@gmail.com","123456");
+        UserIdentity damien = new UserIdentity("Damien","Cheung","d@gmail.com","123456");
+        UserIdentity userForCarpool1 = new UserIdentity("guy","1","1@gmail.com","123456");
+        UserIdentity userForCarpool2 = new UserIdentity("guy","2","2@gmail.com","123456");
+        UserIdentity userForCarpool3 = new UserIdentity("guy","3","3@gmail.com","123456");
+        UserIdentity userForCarpool4 = new UserIdentity("guy","4","4@gmail.com","123456");
+        UserIdentity userForCarpool5 = new UserIdentity("guy","5","5@gmail.com","123456");
 
 
         Criteria van_pets = new Criteria(false,false,false,true,false,true);
