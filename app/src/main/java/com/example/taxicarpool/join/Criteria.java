@@ -42,6 +42,29 @@ public class Criteria {
         this.pets = pets;
     }
 
+    public boolean isSuv() {
+        return suv;
+    }
+
+    public boolean isSedan() {
+        return sedan;
+    }
+
+    public boolean isTruck() {
+        return truck;
+    }
+
+    public boolean isVan() {
+        return van;
+    }
+
+    public boolean isGender() {
+        return gender;
+    }
+
+    public boolean isPets() {
+        return pets;
+    }
     public String toString() {
         return "Criteria{" +
                 "suv=" + suv +
