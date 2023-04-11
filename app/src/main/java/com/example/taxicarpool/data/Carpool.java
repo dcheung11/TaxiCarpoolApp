@@ -85,10 +85,10 @@ public class Carpool {
     public String toString() {
         return "Carpool{" +
                 "matchId=" + matchId +
-                ", currentLocation" + currentLocation +
+                ", currentLocation=" + currentLocation +
                 ", destination=" + destination +
                 ", distance=" + distance +
                 ", criteria=" + criteria.toString() +
-                '}';
+                "}\n";
     }
 }

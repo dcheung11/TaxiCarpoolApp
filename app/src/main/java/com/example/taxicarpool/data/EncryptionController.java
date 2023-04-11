@@ -59,11 +59,13 @@ public class EncryptionController {
         Criteria sedan_gender_pets = new Criteria(false,true,false,false,true,true);
         Criteria suv_pets = new Criteria(true,false,false,false,false,true);
 
-        Carpool itb_lazeez_1 = new Carpool(1L,"Information Technology Building","Lazeez Shawarma", 3.0F, van_pets);
-        Carpool itb_lazeez_2 = new Carpool(2L,"Information Technology Building","Lazeez Shawarma", 3.0F, van_gender_pets);
-        Carpool itb_lazeez_3 = new Carpool(3L,"Information Technology Building","Lazeez Shawarma", 3.0F, truck);
-        Carpool itb_lazeez_4 = new Carpool(4L,"Information Technology Building","Lazeez Shawarma", 3.0F, truck_gender);
-        Carpool itb_lazeez_5 = new Carpool(5L,"Information Technology Building","Lazeez Shawarma", 3.0F, sedan_gender_pets);
+
+        float itb_lazeez_distance = (float) 1.2182198;
+        Carpool itb_lazeez_1 = new Carpool(1L,"Information Technology Building","Lazeez Shawarma", itb_lazeez_distance, van_pets);
+        Carpool itb_lazeez_2 = new Carpool(2L,"Information Technology Building","Lazeez Shawarma", itb_lazeez_distance, van_gender_pets);
+        Carpool itb_lazeez_3 = new Carpool(3L,"Information Technology Building","Lazeez Shawarma", itb_lazeez_distance, truck);
+        Carpool itb_lazeez_4 = new Carpool(4L,"Information Technology Building","Lazeez Shawarma", itb_lazeez_distance, truck_gender);
+        Carpool itb_lazeez_5 = new Carpool(5L,"Information Technology Building","Lazeez Shawarma", itb_lazeez_distance, sedan_gender_pets);
 
         //Demo make this one? or something
 //        Carpool itb_lazeez_6 = new Carpool(6L,"Information Technology Building","Lazeez Shawarma", 3.0F, suv_pets);
