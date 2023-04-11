@@ -18,7 +18,7 @@
         android:theme="@style/Theme.TaxiCarpool"
         tools:targetApi="31">
         <activity
-            android:name=".create.SelectAddressActivity"
+            android:name=".create.CarpoolInputActivity"
             android:exported="false" />
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -59,9 +59,6 @@
             android:exported="false" />
         <activity
             android:name=".arrive.ArrivalActivity"
-            android:exported="false" />
-        <activity
-            android:name=".create.CarpoolDetailsInputActivity"
             android:exported="false" />
         <activity
             android:name=".profile.EditActivity"

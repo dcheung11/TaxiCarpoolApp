@@ -2,10 +2,13 @@ package com.example.taxicarpool.create;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +17,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.taxicarpool.LoggedInUser;
 import com.example.taxicarpool.R;
@@ -25,9 +29,12 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
@@ -40,25 +47,29 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import java.util.Arrays;
 import java.util.List;
 
-public class SelectAddressActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class CarpoolInputActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener,
+        GoogleMap.OnMyLocationClickListener {
     Context context;
-    private static String TAG = SelectAddressActivity.class.getSimpleName();
+    private static String TAG = CarpoolInputActivity.class.getSimpleName();
     private GoogleMap map;
-    private LatLng coordinates;
-    private Marker marker;
+    private Marker startMarker;
+    private Marker endMarker;
+     private Polyline polyline;
 
+    private SupportMapFragment mapFragment;
 
+    private PlacesClient placesClient;
+    private View mapPanel;
+    private static final String MAP_FRAGMENT_TAG = "MAP";
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+    private boolean permissionDenied = false;
     Button create;
-
     RadioButton suv;
     RadioButton sedan;
     RadioButton truck;
     RadioButton van;
-
     CheckBox gender;
     CheckBox pets;        ;
-
-
     TextView text_match_id;
     String matchId;
     AutocompleteSupportFragment currentLocationSearch;
@@ -73,8 +84,13 @@ public class SelectAddressActivity extends AppCompatActivity implements OnMapRea
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_address);
+        setContentView(R.layout.activity_carpool_details);
         String apiKey = getString(R.string.maps_key);
+
+        //         Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.confirmation_map);
+        mapFragment.getMapAsync(this);
 
         /**
          * Initialize Places. For simplicity, the API key is hard-coded. In a production
@@ -93,6 +109,8 @@ public class SelectAddressActivity extends AppCompatActivity implements OnMapRea
         currentLocationSearch.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
         destinationSearch.setPlaceFields(Arrays.asList(Place.Field.ID, Place.Field.NAME));
 
+
+        // Getting place from search
         currentLocationSearch.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
@@ -111,6 +129,13 @@ public class SelectAddressActivity extends AppCompatActivity implements OnMapRea
                     LatLng latLng = response.getPlace().getLatLng();
                     Log.d(TAG, "Place coordinates: " + latLng.toString());
                     currentCoordinates = latLng;
+                    if (startMarker != null) {
+                        startMarker.remove();
+                    }
+                    startMarker = map.addMarker(new MarkerOptions().position(latLng).title(currentLocation));
+
+                    // Move the camera to the new marker's location
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                 }).addOnFailureListener((exception) -> {
                     // Handle any errors that occur while fetching the place
                     Log.e(TAG, "Place not found: " + exception.getMessage());
@@ -140,6 +165,20 @@ public class SelectAddressActivity extends AppCompatActivity implements OnMapRea
                     LatLng latLng = response.getPlace().getLatLng();
                     Log.d(TAG, "Place coordinates: " + latLng.toString());
                     destinationCoordinates = latLng;
+                    if (endMarker != null) {
+                        endMarker.remove();
+                    }
+                    endMarker = map.addMarker(new MarkerOptions().position(latLng).title(destination));
+                    if (polyline != null) {
+                        polyline.remove();
+                    }
+                    if (currentCoordinates != null && destinationCoordinates != null) {
+                        polyline = map.addPolyline(new PolylineOptions()
+                                .clickable(true)
+                                .add(currentCoordinates, destinationCoordinates));
+
+                    }
+
                 }).addOnFailureListener((exception) -> {
                     // Handle any errors that occur while fetching the place
                     Log.e(TAG, "Place not found: " + exception.getMessage());
@@ -164,40 +203,30 @@ public class SelectAddressActivity extends AppCompatActivity implements OnMapRea
         sedan = findViewById(R.id.radio_sedan);
         truck = findViewById(R.id.radio_truck);
         van = findViewById(R.id.radio_van);
-
         gender = findViewById(R.id.checkBox_gender);
         pets = findViewById(R.id.checkBox_pets);
-
         create = findViewById(R.id.create);
     }
 
     public void handleCreate(View v) throws Exception{
-        float f = 10;
         Criteria criteria = new Criteria(suv.isChecked(), sedan.isChecked(),truck.isChecked(), van.isChecked(), gender.isChecked(),pets.isChecked());
-        System.out.println(currentCoordinates);
-        System.out.println(destinationCoordinates);
         float[] results = new float[1];
-        // Get the start and end locations from the AutocompleteSupportFragments
-        Location.distanceBetween(currentCoordinates.latitude, currentCoordinates.longitude, destinationCoordinates.latitude, destinationCoordinates.longitude,results);
-        distance = results[0]/1000; // Get km distance
+
+        if (isValidCarpool(currentLocation,destination, criteria)){
+            Location.distanceBetween(currentCoordinates.latitude, currentCoordinates.longitude, destinationCoordinates.latitude, destinationCoordinates.longitude,results);
+            distance = results[0]/1000; // Get km distance
+            Carpool carpool = new Carpool(Long.parseLong(matchId),currentLocation,destination,distance,criteria);
+            CarpoolUserCrossRef carpoolUserCrossRef = new CarpoolUserCrossRef(carpool, LoggedInUser.getInstance().getUser());
+            EncryptionController encryptionController = EncryptionController.getInstance(getApplicationContext());
+            encryptionController.insertCarpool(carpool);
+            encryptionController.insertCarpoolRef(carpoolUserCrossRef);
+            System.out.println(encryptionController.getAllCarpool());
+            finish();
+        } else {
+            create.setError("Missing values in form!");
+        }
 
 
-
-        Carpool carpool = new Carpool(Long.parseLong(matchId),currentLocation,destination,distance,criteria);
-//        LoggedInUser user = new LoggedInUser();
-        CarpoolUserCrossRef carpoolUserCrossRef = new CarpoolUserCrossRef(carpool, LoggedInUser.getInstance().getUser());
-
-        EncryptionController encryptionController = EncryptionController.getInstance(getApplicationContext());
-        encryptionController.insertCarpool(carpool);
-        encryptionController.insertCarpoolRef(carpoolUserCrossRef);
-
-        System.out.println(encryptionController.getAllCarpool());
-
-//        System.out.println(carpool.getMatchId());
-//        System.out.println(carpool.getCurrentLocation());
-//        System.out.println(carpool.getDestination());
-//        System.out.println(carpool.getDistance());
-        finish();
 
 
     }
@@ -205,19 +234,95 @@ public class SelectAddressActivity extends AppCompatActivity implements OnMapRea
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         map = googleMap;
-        try {
-            // Customise the styling of the base map using a JSON object defined
-            // in a string resource.
-            boolean success = true;
+        map.setOnMyLocationButtonClickListener(this);
+        map.setOnMyLocationClickListener(this);
+        LatLng mcmaster = new LatLng( 43.2609, -79.9192);
 
-            if (!success) {
-                Log.e(TAG, "Style parsing failed.");
-            }
-        } catch (Resources.NotFoundException e) {
-            Log.e(TAG, "Can't find style. Error: ", e);
+        map.moveCamera(CameraUpdateFactory.newLatLng(mcmaster));
+        map.moveCamera(CameraUpdateFactory.zoomTo(15));
+
+        enableMyLocation(map);
+    }
+
+    @SuppressLint("MissingPermission")
+    private void enableMyLocation(GoogleMap googleMap) {
+        // [START maps_check_location_permission]
+        // 1. Check if permissions are granted, if so, enable the my location layer
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+            googleMap.setMyLocationEnabled(true);
+            return;
         }
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(coordinates, 15f));
-        marker = map.addMarker(new MarkerOptions().position(coordinates));
+
+        // 2. Otherwise, request location permissions from the user.
+        PermissionUtils.requestLocationPermissions(this, LOCATION_PERMISSION_REQUEST_CODE, true);
+        // [END maps_check_location_permission]
+    }
+    @Override
+    public boolean onMyLocationButtonClick() {
+        Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
+        return false;
+    }
+
+    @Override
+    public void onMyLocationClick(@NonNull Location location) {
+        Toast.makeText(this, "Current location:\n" + location, Toast.LENGTH_LONG).show();
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode != LOCATION_PERMISSION_REQUEST_CODE) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            return;
+        }
+
+        if (PermissionUtils.isPermissionGranted(permissions, grantResults,
+                Manifest.permission.ACCESS_FINE_LOCATION) || PermissionUtils
+                .isPermissionGranted(permissions, grantResults,
+                        Manifest.permission.ACCESS_COARSE_LOCATION)) {
+            // Enable the my location layer if the permission has been granted.
+            enableMyLocation(map);
+        } else {
+            // Permission was denied. Display an error message
+            // [START_EXCLUDE]
+            // Display the missing permission error dialog when the fragments resume.
+            permissionDenied = true;
+            // [END_EXCLUDE]
+        }
+    }
+    // [END maps_check_location_permission_result]
+
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
+        if (permissionDenied) {
+            // Permission was not granted, display error dialog.
+            showMissingPermissionError();
+            permissionDenied = false;
+        }
+    }
+
+    /**
+     * Displays a dialog with error message explaining that the location permission is missing.
+     */
+    private void showMissingPermissionError() {
+        PermissionUtils.PermissionDeniedDialog
+                .newInstance(true).show(getSupportFragmentManager(), "dialog");
+    }
+
+    public boolean isValidCarpool(String currentLocation, String destination, Criteria criteria) {
+        boolean locationSelected = false;
+        if (currentLocation != null && destination != null) {
+            locationSelected = true;
+        }
+        boolean carTypeSelected = false;
+        if (criteria.isSuv() || criteria.isSedan() || criteria.isTruck() || criteria.isVan()) {
+            carTypeSelected = true;
+        }
+        return locationSelected && carTypeSelected;
+
     }
 
 }
