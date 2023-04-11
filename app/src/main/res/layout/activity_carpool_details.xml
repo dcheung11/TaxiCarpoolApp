@@ -25,7 +25,7 @@
         android:layout_width="104dp"
         android:layout_height="48dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="44dp"
+        android:layout_marginEnd="80dp"
         android:text="Pets"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/checkbox_gender"
@@ -35,10 +35,11 @@
         android:id="@+id/checkBox_gender"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="80dp"
         android:text="Female-Only"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox_pets" />
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <RadioGroup
         android:id="@+id/vehicle_group"
@@ -163,8 +164,34 @@
         android:layout_marginTop="7dp"
         android:layout_marginEnd="177dp"
         android:text="Match ID:"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/confirmation_map" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="52dp"
+        android:text="SAFE RIDE Options"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox_pets" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="51dp"
+        android:text="Min 4 Star Carpoolers"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/checkBox_gender"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox_gender" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

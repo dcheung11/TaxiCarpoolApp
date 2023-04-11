@@ -60,4 +60,14 @@
         android:text="@string/homescreen_create"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/HomescreenTitle" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="119dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="146dp"
+        app:layout_constraintBottom_toTopOf="@+id/HomescreenTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_myplaces" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
