@@ -60,8 +60,6 @@ public class CreateCarpoolActivity extends AppCompatActivity {
     }
 
     boolean isValidId(){
-        String s = taxi_id_input.getText().toString();
-
         if (isEmpty(taxi_id_input) ){
             taxi_id_input.setError("Taxi ID Required");
 //            System.out.println(s + " is INVALID ");
