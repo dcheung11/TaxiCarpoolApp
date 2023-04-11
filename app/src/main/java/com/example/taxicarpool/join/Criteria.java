@@ -9,13 +9,13 @@ public class Criteria {
 
     public boolean suv, sedan, truck, van, gender, pets;
 
-    public Criteria() {
-        this.suv = true;
-        this.sedan = true;
-        this.truck = true;
-        this.van = true;
-        this.gender = true;
-        this.pets = true;
+    public Criteria(boolean suv, boolean sedan, boolean truck, boolean van, boolean gender, boolean pets) {
+        this.suv = suv;
+        this.sedan = sedan;
+        this.truck = truck;
+        this.van = van;
+        this.gender = gender;
+        this.pets = pets;
     }
 
     public void setSuv(boolean suv) {
