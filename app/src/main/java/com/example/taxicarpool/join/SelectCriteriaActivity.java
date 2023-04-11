@@ -42,49 +42,12 @@ public class SelectCriteriaActivity extends AppCompatActivity {
     // This function is invoked when the button is pressed.
     public void returnToSearch(View V){
         String msg="";
-        Criteria criteria = new Criteria();
 
-        // Concatenation of the checked options in if
 
         // isChecked() is used to check whether
         // the CheckBox is in true state or not.
 
-        if(checkbox_suv.isChecked()){
-            criteria.setSuv(true);
-            msg = msg + " SUV ";
-        }
-        else
-            criteria.setSuv(false);
-        if(checkbox_sedan.isChecked()){
-            criteria.setSedan(true);
-            msg = msg + " Sedan ";
-        }
-        else
-            criteria.setSedan(false);
-        if(checkbox_truck.isChecked()){
-            criteria.setTruck(true);
-            msg = msg + " Truck ";
-        }
-        else
-            criteria.setTruck(false);
-        if(checkbox_van.isChecked()){
-            criteria.setVan(true);
-            msg = msg + " Van ";
-        }
-        else
-            criteria.setVan(false);
-        if(checkbox_gender.isChecked()){
-            criteria.setGender(true);
-            msg = msg + " Same-gendered only ";
-        }
-        else
-            criteria.setGender(false);
-        if(checkbox_pets.isChecked()){
-            criteria.setPets(true);
-            msg = msg + " pets allowed ";
-        }
-        else
-            criteria.setPets(false);
+        Criteria critera = new Criteria(checkbox_suv.isChecked(), checkbox_sedan.isChecked(), checkbox_truck.isChecked(), checkbox_van.isChecked(), checkbox_gender.isChecked(), checkbox_pets.isChecked());
 
 
 
