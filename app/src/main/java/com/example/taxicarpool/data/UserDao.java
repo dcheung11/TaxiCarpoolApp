@@ -23,6 +23,9 @@ public interface UserDao {
             "lastName LIKE :last LIMIT 1")
     UserIdentity findByName(String first, String last);
 
+    @Query("SELECT * FROM useridentity WHERE email LIKE :email LIMIT 1")
+    UserIdentity findByEmail(String email);
+
 
     @Insert
     Long insertUser(UserIdentity user);
@@ -41,6 +44,9 @@ public interface UserDao {
 
     @Query("SELECT * FROM Carpool WHERE matchId == :id")
     Carpool findCarpoolById(Long id);
+
+    @Query("SELECT * FROM Carpool WHERE destination == :destination AND currentLocation == :currentLocation")
+    List<Carpool> findCarpoolByTrip(String currentLocation, String destination);
 
     @Insert
     void insertCarpool(Carpool... carpool);

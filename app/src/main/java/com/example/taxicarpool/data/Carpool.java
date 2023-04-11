@@ -1,7 +1,10 @@
 package com.example.taxicarpool.data;
 
+import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.example.taxicarpool.join.Criteria;
 
 import java.util.Objects;
 
@@ -15,10 +18,17 @@ public class Carpool {
 
     public Float distance;
 
-    public Carpool(Long matchId, String currentLocation, String destination, Float distance) {
+    @Embedded
+    public Criteria criteria;
+
+
+    public Carpool(Long matchId, String currentLocation, String destination, Float distance, Criteria criteria) {
         this.matchId = matchId;
         this.currentLocation = currentLocation;
         this.destination = destination;
+        this.distance = distance;
+        this.criteria = criteria;
+
     }
 
     public Long getMatchId() {
@@ -71,8 +81,10 @@ public class Carpool {
     public String toString() {
         return "Carpool{" +
                 "matchId=" + matchId +
-                ", destination='" + destination + '\'' +
+                ", currentLocaion" + currentLocation +
+                ", destination=" + destination +
                 ", distance=" + distance +
+                ", criteria=" + criteria.toString() +
                 '}';
     }
 }

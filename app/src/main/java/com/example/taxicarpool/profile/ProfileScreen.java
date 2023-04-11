@@ -19,6 +19,7 @@ public class ProfileScreen extends AppCompatActivity {
     TextView firstName;
     TextView lastName;
     TextView email;
+    TextView rating;
     UserIdentity user;
 
     @Override
@@ -27,29 +28,29 @@ public class ProfileScreen extends AppCompatActivity {
         setContentView(R.layout.activity_profile_screen);
         user = LoggedInUser.getInstance().getUser();
         firstName = findViewById(R.id.profile_screen_first_name);
-        String field1 = "First Name: " + user.getFirstName();
-        firstName.setText(field1);
         lastName = findViewById(R.id.profile_screen_last_name);
-        String field2 = "Last Name: " + user.getLastName();
-        lastName.setText(field2);
         email = findViewById(R.id.profile_screen_email);
-        String field3 = "Email: " + user.getEmail();
-        email.setText(field3);
+        rating = findViewById(R.id.profile_screen_rating);
+        setDetails();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         user = LoggedInUser.getInstance().getUser();
-        firstName = findViewById(R.id.profile_screen_first_name);
+        setDetails();
+    }
+
+    public void setDetails(){
         String field1 = "First Name: " + user.getFirstName();
         firstName.setText(field1);
-        lastName = findViewById(R.id.profile_screen_last_name);
         String field2 = "Last Name: " + user.getLastName();
         lastName.setText(field2);
-        email = findViewById(R.id.profile_screen_email);
         String field3 = "Email: " + user.getEmail();
         email.setText(field3);
+        String field4 = "Rating: " + user.getRating();
+        rating.setText(field4);
+
     }
 
     public void delete(View v) throws Exception {

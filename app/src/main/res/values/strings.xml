@@ -10,6 +10,18 @@
     <string name="createscreen_title">Input Taxi ID</string>
     <string name="createscreen_clickprompt">Click here!</string>
     <string name="createscreen_submitprompt">Submit</string>
+    <string name="profile_screen_logout_button">Log Out</string>
+    <string name="profile_screen_delete_button">Delete</string>
+    <string name="profile_screen_edit_button">Edit</string>
+    <string name="login_link">Login</string>
+    <string name="register_link">Register</string>
+    <string name="profile_link">Profile</string>
+    <string name="edit_old_password">Old Password</string>
+    <string name="edit_complete_button">Edit</string>
+    <string name="edit_new_password">New Password</string>
+    <string name="edit_text_email">Email</string>
+    <string name="edit_first_name">First Name</string>
+    <string name="edit_last_name">Last Name</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -19,5 +31,10 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
+    <string name="location_permission_denied">This sample requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.</string>
+    <string name="permission_required_toast">Location permission is required for this demo.</string>
+    <string name="maps_api_key">AIzaSyBbvNGp9rBI9WqA23MuP_S-A5De0Rr1l-w </string>
 </resources>
