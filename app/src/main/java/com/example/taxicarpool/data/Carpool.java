@@ -64,6 +64,10 @@ public class Carpool {
         this.distance = distance;
     }
 
+    public Criteria getCriteria() {
+        return criteria;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -81,7 +85,7 @@ public class Carpool {
     public String toString() {
         return "Carpool{" +
                 "matchId=" + matchId +
-                ", currentLocaion" + currentLocation +
+                ", currentLocation" + currentLocation +
                 ", destination=" + destination +
                 ", distance=" + distance +
                 ", criteria=" + criteria.toString() +

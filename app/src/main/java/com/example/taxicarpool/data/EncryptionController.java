@@ -44,10 +44,32 @@ public class EncryptionController {
 
     public static void initialize(){
         UserIdentity user1 = new UserIdentity("Justin","Dang","123@gmail.com","123456");
-        UserIdentity user2 = new UserIdentity("Justin","Dang","1234@gmail.com","123456");
+        UserIdentity damien = new UserIdentity("Damien","Cheung","d@@gmail.com","123456");
+        UserIdentity userForCarpool1 = new UserIdentity("guy","1","1@@gmail.com","123456");
+        UserIdentity userForCarpool2 = new UserIdentity("guy","2","2@@gmail.com","123456");
+        UserIdentity userForCarpool3 = new UserIdentity("guy","3","3@@gmail.com","123456");
+        UserIdentity userForCarpool4 = new UserIdentity("guy","4","4@@gmail.com","123456");
+
         dao.insertUser(user1);
-        dao.insertUser(user2);
-        Carpool carpool1 = new Carpool(1L,"Death","Death", 0.0F);
+        dao.insertUser(damien);
+        dao.insertUser(userForCarpool1);
+        dao.insertUser(userForCarpool2);
+        dao.insertUser(userForCarpool3);
+        dao.insertUser(userForCarpool4);
+
+//        Criteria van_pets = new Criteria();
+//        Criteria truck_pets_gender = new Criteria();
+//        van_pets.setSuv(false);
+//        van_pets.setSedan(false);
+//        van_pets.setTruck(false);
+//        truck_pets_gender.setSuv(false);
+//        truck_pets_gender.setSedan(false);
+//        truck_pets_gender.setVan(false);
+//        van_pets.setGender(false);
+//        Carpool carpool1 = new Carpool(1L,"Information Technology Building","Death", 0.0F, van_pets);
+//        Carpool carpool2 = new Carpool(2L,"Information Technology Building","Death", 0.0F, truck_pets_gender);
+//        dao.insertCarpool(carpool1);
+//        dao.insertCarpool(carpool2);
     }
 
     public Long insertUser(UserIdentity user){
@@ -84,9 +106,6 @@ public class EncryptionController {
 
     public void insertCarpoolRef(CarpoolUserCrossRef ref){
         dao.insertCarpoolUserRef(ref);
-    }
-    public List<Carpool> findCarpoolByTrip(String location, String destination){
-        return dao.findCarpoolByTrip(location, destination);
     }
 
 

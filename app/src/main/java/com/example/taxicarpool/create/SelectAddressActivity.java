@@ -65,7 +65,7 @@ public class SelectAddressActivity extends AppCompatActivity implements OnMapRea
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_address);
-        String apiKey = getString(R.string.maps_api_key);
+        String apiKey = getString(R.string.maps_key);
 
         /**
          * Initialize Places. For simplicity, the API key is hard-coded. In a production
