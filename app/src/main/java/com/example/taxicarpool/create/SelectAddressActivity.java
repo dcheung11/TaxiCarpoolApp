@@ -3,14 +3,15 @@ package com.example.taxicarpool.create;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -27,15 +28,20 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.FetchPlaceRequest;
+import com.google.android.libraries.places.api.net.FetchPlaceResponse;
+import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class SelectAddressActivity extends AppCompatActivity implements OnMapReadyCallback {
-
+    Context context;
     private static String TAG = SelectAddressActivity.class.getSimpleName();
     private GoogleMap map;
     private LatLng coordinates;
@@ -58,8 +64,11 @@ public class SelectAddressActivity extends AppCompatActivity implements OnMapRea
     AutocompleteSupportFragment currentLocationSearch;
     AutocompleteSupportFragment destinationSearch;
 
+    LatLng currentCoordinates;
+    LatLng destinationCoordinates;
     String currentLocation;
     String destination;
+    float distance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +97,24 @@ public class SelectAddressActivity extends AppCompatActivity implements OnMapRea
             @Override
             public void onPlaceSelected(Place place) {
                 // TODO: Get info about the selected place.
-                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
+//                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId() + ", " + place.getLatLng() + ", " + place.getAddress());
                 currentLocation = place.getName();
+
+                // Use the Google Places API to fetch details about the place
+                PlacesClient placesClient = Places.createClient(getApplicationContext());
+                List<Place.Field> placeFields = Arrays.asList(Place.Field.LAT_LNG);
+                FetchPlaceRequest request = FetchPlaceRequest.newInstance(place.getId(), placeFields);
+
+                Task<FetchPlaceResponse> placeTask = placesClient.fetchPlace(request);
+                placeTask.addOnSuccessListener((response) -> {
+                    // Get the place's LatLng coordinates
+                    LatLng latLng = response.getPlace().getLatLng();
+                    Log.d(TAG, "Place coordinates: " + latLng.toString());
+                    currentCoordinates = latLng;
+                }).addOnFailureListener((exception) -> {
+                    // Handle any errors that occur while fetching the place
+                    Log.e(TAG, "Place not found: " + exception.getMessage());
+                });
             }
 
             @Override
@@ -103,8 +128,22 @@ public class SelectAddressActivity extends AppCompatActivity implements OnMapRea
             @Override
             public void onPlaceSelected(Place place) {
                 // TODO: Get info about the selected place.
-                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
                 destination = place.getName();
+                // Use the Google Places API to fetch details about the place
+                PlacesClient placesClient = Places.createClient(getApplicationContext());
+                List<Place.Field> placeFields = Arrays.asList(Place.Field.LAT_LNG);
+                FetchPlaceRequest request = FetchPlaceRequest.newInstance(place.getId(), placeFields);
+
+                Task<FetchPlaceResponse> placeTask = placesClient.fetchPlace(request);
+                placeTask.addOnSuccessListener((response) -> {
+                    // Get the place's LatLng coordinates
+                    LatLng latLng = response.getPlace().getLatLng();
+                    Log.d(TAG, "Place coordinates: " + latLng.toString());
+                    destinationCoordinates = latLng;
+                }).addOnFailureListener((exception) -> {
+                    // Handle any errors that occur while fetching the place
+                    Log.e(TAG, "Place not found: " + exception.getMessage());
+                });
             }
 
             @Override
@@ -135,14 +174,22 @@ public class SelectAddressActivity extends AppCompatActivity implements OnMapRea
     public void handleCreate(View v) throws Exception{
         float f = 10;
         Criteria criteria = new Criteria(suv.isChecked(), sedan.isChecked(),truck.isChecked(), van.isChecked(), gender.isChecked(),pets.isChecked());
+        System.out.println(currentCoordinates);
+        System.out.println(destinationCoordinates);
+        float[] results = new float[1];
+        // Get the start and end locations from the AutocompleteSupportFragments
+        Location.distanceBetween(currentCoordinates.latitude, currentCoordinates.longitude, destinationCoordinates.latitude, destinationCoordinates.longitude,results);
+        distance = results[0]/1000; // Get km distance
 
-        Carpool carpool = new Carpool(Long.parseLong(matchId),currentLocation, destination,f,criteria);
-        LoggedInUser user = new LoggedInUser();
-//        CarpoolUserCrossRef carpoolUserCrossRef = new CarpoolUserCrossRef(carpool, user.getUser());
+
+
+        Carpool carpool = new Carpool(Long.parseLong(matchId),currentLocation,destination,distance,criteria);
+//        LoggedInUser user = new LoggedInUser();
+        CarpoolUserCrossRef carpoolUserCrossRef = new CarpoolUserCrossRef(carpool, LoggedInUser.getInstance().getUser());
 
         EncryptionController encryptionController = EncryptionController.getInstance(getApplicationContext());
         encryptionController.insertCarpool(carpool);
-//        encryptionController.insertCarpoolRef(carpoolUserCrossRef);
+        encryptionController.insertCarpoolRef(carpoolUserCrossRef);
 
         System.out.println(encryptionController.getAllCarpool());
 
