@@ -2,11 +2,15 @@ package com.example.taxicarpool.arrive;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.taxicarpool.LoggedInUser;
 import com.example.taxicarpool.MainActivity;
 import com.example.taxicarpool.R;
+import com.example.taxicarpool.data.EncryptionController;
+import com.example.taxicarpool.data.UserIdentity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 public class PayNow extends AppCompatActivity {

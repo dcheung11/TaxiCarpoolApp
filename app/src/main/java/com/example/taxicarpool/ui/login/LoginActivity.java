@@ -48,7 +48,11 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login();
+                try {
+                    login();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -62,12 +66,11 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 
-    void login(){
+    void login() throws Exception {
         if(valid()) {
             UserIdentity loginAttempt;
-            try {
-                loginAttempt = EncryptionController.getInstance(this).findByEmail(email.getText().toString());
-            } catch (Exception e) {
+            loginAttempt = EncryptionController.getInstance(getApplicationContext()).findByEmail(email.getText().toString());
+            if (loginAttempt==null){
                 Toast.makeText(getApplicationContext(), "No user found", Toast.LENGTH_SHORT).show();
                 return;
             }
