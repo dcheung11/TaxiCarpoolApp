@@ -49,6 +49,30 @@ public class EncryptionController {
         UserIdentity userForCarpool2 = new UserIdentity("guy","2","2@@gmail.com","123456");
         UserIdentity userForCarpool3 = new UserIdentity("guy","3","3@@gmail.com","123456");
         UserIdentity userForCarpool4 = new UserIdentity("guy","4","4@@gmail.com","123456");
+        UserIdentity userForCarpool5 = new UserIdentity("guy","5","5@@gmail.com","123456");
+
+
+        Criteria van_pets = new Criteria(false,false,false,true,false,true);
+        Criteria van_gender_pets = new Criteria(false,false,false,true,false,true);
+        Criteria truck = new Criteria(false,false,true, false,false,false);
+        Criteria truck_gender = new Criteria(false,false,true, false,true,false);
+        Criteria sedan_gender_pets = new Criteria(false,true,false,false,true,true);
+        Criteria suv_pets = new Criteria(true,false,false,false,false,true);
+
+        Carpool itb_lazeez_1 = new Carpool(1L,"Information Technology Building","Lazeez Shawarma", 3.0F, van_pets);
+        Carpool itb_lazeez_2 = new Carpool(2L,"Information Technology Building","Lazeez Shawarma", 3.0F, van_gender_pets);
+        Carpool itb_lazeez_3 = new Carpool(3L,"Information Technology Building","Lazeez Shawarma", 3.0F, truck);
+        Carpool itb_lazeez_4 = new Carpool(4L,"Information Technology Building","Lazeez Shawarma", 3.0F, truck_gender);
+        Carpool itb_lazeez_5 = new Carpool(5L,"Information Technology Building","Lazeez Shawarma", 3.0F, sedan_gender_pets);
+
+        //Demo make this one? or something
+//        Carpool itb_lazeez_6 = new Carpool(6L,"Information Technology Building","Lazeez Shawarma", 3.0F, suv_pets);
+
+        CarpoolUserCrossRef crossRef1 = new CarpoolUserCrossRef(itb_lazeez_1, userForCarpool1);
+        CarpoolUserCrossRef crossRef2 = new CarpoolUserCrossRef(itb_lazeez_2, userForCarpool2);
+        CarpoolUserCrossRef crossRef3 = new CarpoolUserCrossRef(itb_lazeez_3, userForCarpool3);
+        CarpoolUserCrossRef crossRef4 = new CarpoolUserCrossRef(itb_lazeez_4, userForCarpool4);
+        CarpoolUserCrossRef crossRef5 = new CarpoolUserCrossRef(itb_lazeez_5, userForCarpool5);
 
         dao.insertUser(user1);
         dao.insertUser(damien);
@@ -56,20 +80,17 @@ public class EncryptionController {
         dao.insertUser(userForCarpool2);
         dao.insertUser(userForCarpool3);
         dao.insertUser(userForCarpool4);
+        dao.insertCarpool(itb_lazeez_1);
+        dao.insertCarpool(itb_lazeez_2);
+        dao.insertCarpool(itb_lazeez_3);
+        dao.insertCarpool(itb_lazeez_4);
+        dao.insertCarpool(itb_lazeez_5);
+        dao.insertCarpoolUserRef(crossRef1);
+        dao.insertCarpoolUserRef(crossRef2);
+        dao.insertCarpoolUserRef(crossRef3);
+        dao.insertCarpoolUserRef(crossRef4);
+        dao.insertCarpoolUserRef(crossRef5);
 
-//        Criteria van_pets = new Criteria();
-//        Criteria truck_pets_gender = new Criteria();
-//        van_pets.setSuv(false);
-//        van_pets.setSedan(false);
-//        van_pets.setTruck(false);
-//        truck_pets_gender.setSuv(false);
-//        truck_pets_gender.setSedan(false);
-//        truck_pets_gender.setVan(false);
-//        van_pets.setGender(false);
-//        Carpool carpool1 = new Carpool(1L,"Information Technology Building","Death", 0.0F, van_pets);
-//        Carpool carpool2 = new Carpool(2L,"Information Technology Building","Death", 0.0F, truck_pets_gender);
-//        dao.insertCarpool(carpool1);
-//        dao.insertCarpool(carpool2);
     }
 
     public Long insertUser(UserIdentity user){

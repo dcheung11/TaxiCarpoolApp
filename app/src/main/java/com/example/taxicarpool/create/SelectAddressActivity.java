@@ -134,13 +134,7 @@ public class SelectAddressActivity extends AppCompatActivity implements OnMapRea
 
     public void handleCreate(View v) throws Exception{
         float f = 10;
-        Criteria criteria = new Criteria();
-        criteria.setSuv(suv.isChecked());
-        criteria.setSedan(sedan.isChecked());
-        criteria.setTruck(truck.isChecked());
-        criteria.setVan(van.isChecked());
-        criteria.setGender(gender.isChecked());
-        criteria.setPets(pets.isChecked());
+        Criteria criteria = new Criteria(suv.isChecked(), sedan.isChecked(),truck.isChecked(), van.isChecked(), gender.isChecked(),pets.isChecked());
 
         Carpool carpool = new Carpool(Long.parseLong(matchId),currentLocation, destination,f,criteria);
         LoggedInUser user = new LoggedInUser();
