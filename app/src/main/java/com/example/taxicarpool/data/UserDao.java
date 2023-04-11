@@ -64,4 +64,8 @@ public interface UserDao {
     @Transaction
     @Query("SELECT * FROM carpool WHERE matchId=(:matchId) LIMIT 1")
     CarpoolWithRiders getCarpoolWithRiders(Long matchId);
+
+    @Transaction
+    @Query("SELECT * FROM useridentity WHERE uid=(:id) LIMIT 1")
+    RiderWithCarpools getRiderWithCarpools(Long id);
 }

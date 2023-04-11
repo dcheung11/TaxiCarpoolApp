@@ -137,6 +137,10 @@ public class EncryptionController {
         return dao.getCarpoolWithRiders(matchId);
     }
 
+    public RiderWithCarpools riderWithCarpools(Long id){
+        return dao.getRiderWithCarpools(id);
+    }
+
     public byte[] encrypt(String input) throws Exception{
         //encryption mode
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
