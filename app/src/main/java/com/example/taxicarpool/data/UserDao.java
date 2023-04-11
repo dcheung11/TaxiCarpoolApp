@@ -45,7 +45,6 @@ public interface UserDao {
     @Query("SELECT * FROM Carpool WHERE matchId == :id")
     Carpool findCarpoolById(Long id);
 
-
     @Query("SELECT * FROM Carpool WHERE destination == :destination AND currentLocation == :currentLocation")
     List<Carpool> findCarpoolByTrip(String currentLocation, String destination);
 
@@ -64,5 +63,4 @@ public interface UserDao {
     @Transaction
     @Query("SELECT * FROM carpool WHERE matchId=(:matchId) LIMIT 1")
     CarpoolWithRiders getCarpoolWithRiders(Long matchId);
-
 }
