@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -23,6 +24,9 @@ public class RegisterActivity extends AppCompatActivity {
     EditText lastName;
     EditText email;
     EditText password;
+
+    CheckBox male;
+    CheckBox female;
     Button register;
 
     @Override
@@ -34,12 +38,20 @@ public class RegisterActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         register = findViewById(R.id.register);
+        male = findViewById(R.id.male_checkbox);
+        female = findViewById(R.id.female_checkbox);
     }
 
     public void registerClick(View v) throws Exception {
 
         if (valid()){
-            UserIdentity user = new UserIdentity(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), password.getText().toString());
+            String gender;
+            if (male.isChecked()){
+                gender = "M";
+            } else{
+                gender = "F";
+            }
+            UserIdentity user = new UserIdentity(firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), password.getText().toString(),gender);
             EncryptionController encryptionController = EncryptionController.getInstance(getApplicationContext());
             user.setUid(encryptionController.insertUser(user));
             LoggedInUser.getInstance().login(user);
@@ -67,6 +79,11 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (!isPassword(password)){
             password.setError("Please enter a password that is at least 6 characters long");
+            noError = false;
+        }
+
+        if ((male.isChecked() && female.isChecked()) || (!male.isChecked() && !female.isChecked())) {
+            Toast.makeText(this, "Choose 1 gender", Toast.LENGTH_SHORT).show();
             noError = false;
         }
         return noError;
