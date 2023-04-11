@@ -83,6 +83,10 @@ public class EncryptionController {
         CarpoolUserCrossRef crossRef3 = new CarpoolUserCrossRef(itb_lazeez_3, userForCarpool3);
         CarpoolUserCrossRef crossRef4 = new CarpoolUserCrossRef(itb_lazeez_4, userForCarpool4);
         CarpoolUserCrossRef crossRef5 = new CarpoolUserCrossRef(itb_lazeez_5, userForCarpool5);
+        CarpoolUserCrossRef crossRef6 = new CarpoolUserCrossRef(itb_lazeez_1, userForCarpool2);
+        CarpoolUserCrossRef crossRef7 = new CarpoolUserCrossRef(itb_lazeez_1, userForCarpool3);
+        CarpoolUserCrossRef crossRef8 = new CarpoolUserCrossRef(itb_lazeez_1, userForCarpool4);
+
 
 
         dao.insertCarpool(itb_lazeez_1);
@@ -95,6 +99,10 @@ public class EncryptionController {
         dao.insertCarpoolUserRef(crossRef3);
         dao.insertCarpoolUserRef(crossRef4);
         dao.insertCarpoolUserRef(crossRef5);
+        dao.insertCarpoolUserRef(crossRef6);
+        dao.insertCarpoolUserRef(crossRef7);
+        dao.insertCarpoolUserRef(crossRef8);
+
 
     }
 
