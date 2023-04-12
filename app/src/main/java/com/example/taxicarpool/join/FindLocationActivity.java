@@ -1,4 +1,4 @@
-package com.example.taxicarpool.create;
+package com.example.taxicarpool.join;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -48,7 +48,7 @@ public class FindLocationActivity extends AppCompatActivity {
         Intent i = new Intent(this, SelectCriteriaActivity.class);
 
         i.putExtra("Current Location", currentLoc);
-        i.putExtra("Destination Location", destinationLoc)
+        i.putExtra("Destination Location", destinationLoc);
 
         startActivity(i);
     }

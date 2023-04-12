@@ -30,10 +30,12 @@ public class SearchResultsActivity extends AppCompatActivity {
 
 
         Criteria criteria = new Criteria(bundle.getBoolean("SUV Criteria"), bundle.getBoolean("Sedan Criteria"), bundle.getBoolean("Truck Criteria"), bundle.getBoolean("Van Criteria"), bundle.getBoolean("Gender Criteria"), bundle.getBoolean("Pets Criteria"));
-        searchResults = matchmaker.getCarpoolSearchResults(bundle.getString("Current Location"), bundle.getString("Destination Location"), criteria);
+        try {
+            searchResults = matchmaker.getCarpoolSearchResults(bundle.getString("Current Location"), bundle.getString("Destination Location"), criteria);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
-
-        
 
     }
 

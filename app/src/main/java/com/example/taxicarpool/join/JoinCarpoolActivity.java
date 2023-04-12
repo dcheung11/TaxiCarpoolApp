@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.taxicarpool.R;
+import com.example.taxicarpool.join.FindLocationActivity;
 
 public class JoinCarpoolActivity extends AppCompatActivity {
 

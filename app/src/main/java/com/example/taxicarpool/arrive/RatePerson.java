@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RatePerson extends AppCompatActivity {
+    RatingBar rating;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,16 +30,15 @@ public class RatePerson extends AppCompatActivity {
         Intent i = getIntent();
         String name = i.getStringExtra("NAME");
         ((TextView)findViewById(R.id.textView6)).setText("Rating: " + name);
-        RatingBar rating = (RatingBar) findViewById(R.id.ratingBar); // initiate a rating bar
-        int numberOfStars = rating.getNumStars(); // what the passenger rated
-        try {
-            UpdateRating(numberOfStars,name);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        rating = (RatingBar) findViewById(R.id.ratingBar); // initiate a rating bar
     }
 
-    public void ratingSuccess(View v){
+    public void ratingSuccess(View v) throws Exception {
+        Intent i = getIntent();
+        String name = i.getStringExtra("NAME");
+        RatingBar rating = (RatingBar) findViewById(R.id.ratingBar); // initiate a rating bar
+        int numberOfStars = (int) rating.getRating(); // what the passenger rated
+        UpdateRating(numberOfStars,name);
         Snackbar snackbar = Snackbar.make(findViewById(R.id.rateLayout),"Rating Submitted!", Snackbar.LENGTH_LONG);
         snackbar.show();
     }
@@ -48,7 +48,6 @@ public class RatePerson extends AppCompatActivity {
     }
 
     public void UpdateRating(int numStars, String name) throws Exception {
-        RatePassengers r1 = new RatePassengers();
         EncryptionController e1 = EncryptionController.getInstance(getApplicationContext());
         LoggedInUser l1 = LoggedInUser.getInstance();
         UserIdentity user = l1.getUser();  //logged in User
@@ -65,8 +64,9 @@ public class RatePerson extends AppCompatActivity {
         }
 
         for (UserIdentity u: u1){
-            if ((u.getFirstName() + " " + u.getLastName())==name){
+            if ((u.getFirstName() + " " + u.getLastName()).equals(name)){
                 u.setRating(numStars);
+                e1.updateUser(u);
             }
         }
 
