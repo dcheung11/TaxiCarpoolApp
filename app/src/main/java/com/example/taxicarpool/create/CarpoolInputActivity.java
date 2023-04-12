@@ -19,6 +19,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.taxicarpool.BuildConfig;
 import com.example.taxicarpool.LoggedInUser;
 import com.example.taxicarpool.R;
 import com.example.taxicarpool.data.Carpool;
@@ -85,7 +86,7 @@ public class CarpoolInputActivity extends AppCompatActivity implements OnMapRead
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carpool_details);
-        String apiKey = getString(R.string.maps_key);
+        String apiKey = BuildConfig.MAPS_API_KEY;
 
         //         Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()

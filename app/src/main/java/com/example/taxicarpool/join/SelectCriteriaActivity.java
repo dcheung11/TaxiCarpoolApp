@@ -54,8 +54,8 @@ public class SelectCriteriaActivity extends AppCompatActivity {
 
         Bundle bundle = i.getExtras();
 
-        i.putExtra("Current Location", bundle.getString("Current Location"));
-        i.putExtra("Destination Location", bundle.getString("Destination Location"));
+        i.putExtra("Current Location", (String) bundle.get("Current Location"));
+        i.putExtra("Destination Location", (String) bundle.get("Destination Location"));
         i.putExtra("SUV Criteria", checkbox_suv.isChecked());
         i.putExtra("Sedan Criteria", checkbox_sedan.isChecked());
         i.putExtra("Truck Criteria", checkbox_truck.isChecked());
