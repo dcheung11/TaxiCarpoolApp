@@ -8,6 +8,7 @@ import android.service.autofill.FieldClassification;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.taxicarpool.MainActivity;
 import com.example.taxicarpool.R;
 import com.example.taxicarpool.data.Carpool;
 import com.example.taxicarpool.join.MatchMaker;
@@ -51,7 +52,7 @@ public class SearchResultsActivity extends AppCompatActivity {
     }
 
     public void carpoolSelected(View V){
-        Intent i = new Intent(this, JoinCarpoolActivity.class);
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
     

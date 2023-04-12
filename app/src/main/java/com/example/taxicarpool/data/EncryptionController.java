@@ -59,7 +59,7 @@ public class EncryptionController {
         userForCarpool5.setUid(dao.insertUser(userForCarpool5));
 
 
-
+        Criteria all_false = new Criteria(false,false,false,false,false,false);
         Criteria van_pets = new Criteria(false,false,false,true,false,true);
         Criteria van_gender_pets = new Criteria(false,false,false,true,false,true);
         Criteria truck = new Criteria(false,false,true, false,false,false);
@@ -74,6 +74,8 @@ public class EncryptionController {
         Carpool itb_lazeez_3 = new Carpool(3L,"Information Technology Building","Lazeez Shawarma", itb_lazeez_distance, truck);
         Carpool itb_lazeez_4 = new Carpool(4L,"Information Technology Building","Lazeez Shawarma", itb_lazeez_distance, truck_gender);
         Carpool itb_lazeez_5 = new Carpool(5L,"Information Technology Building","Lazeez Shawarma", itb_lazeez_distance, sedan_gender_pets);
+        Carpool one_two_6 = new Carpool(6L,"1","2", itb_lazeez_distance, all_false);
+
 
         //Demo make this one? or something
 //        Carpool itb_lazeez_6 = new Carpool(6L,"Information Technology Building","Lazeez Shawarma", 3.0F, suv_pets);
@@ -86,6 +88,7 @@ public class EncryptionController {
         CarpoolUserCrossRef crossRef6 = new CarpoolUserCrossRef(itb_lazeez_1, userForCarpool2);
         CarpoolUserCrossRef crossRef7 = new CarpoolUserCrossRef(itb_lazeez_1, userForCarpool3);
         CarpoolUserCrossRef crossRef8 = new CarpoolUserCrossRef(itb_lazeez_1, userForCarpool4);
+        CarpoolUserCrossRef crossRef9 = new CarpoolUserCrossRef(one_two_6, userForCarpool4);
 
 
 

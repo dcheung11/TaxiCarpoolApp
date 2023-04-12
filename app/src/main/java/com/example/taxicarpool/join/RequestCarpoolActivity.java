@@ -43,6 +43,8 @@ public class RequestCarpoolActivity extends AppCompatActivity {
         checkbox_pets.setChecked(false);
     }
 
+
+
     public void goToResults(View V){
 
         Criteria criteria = new Criteria(checkbox_suv.isChecked(), checkbox_sedan.isChecked(), checkbox_truck.isChecked(), checkbox_van.isChecked(), checkbox_gender.isChecked(), checkbox_pets.isChecked());
