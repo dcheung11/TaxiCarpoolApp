@@ -6,7 +6,6 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -45,22 +44,18 @@ import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class CarpoolInputActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener,
         GoogleMap.OnMyLocationClickListener {
-    Context context;
-    private static String TAG = CarpoolInputActivity.class.getSimpleName();
+    private static final String TAG = CarpoolInputActivity.class.getSimpleName();
     private GoogleMap map;
     private Marker startMarker;
     private Marker endMarker;
      private Polyline polyline;
 
-    private SupportMapFragment mapFragment;
-
-    private PlacesClient placesClient;
-    private View mapPanel;
-    private static final String MAP_FRAGMENT_TAG = "MAP";
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private boolean permissionDenied = false;
     Button create;
@@ -69,7 +64,7 @@ public class CarpoolInputActivity extends AppCompatActivity implements OnMapRead
     RadioButton truck;
     RadioButton van;
     CheckBox gender;
-    CheckBox pets;        ;
+    CheckBox pets;
     TextView text_match_id;
     String matchId;
     AutocompleteSupportFragment currentLocationSearch;
@@ -81,6 +76,7 @@ public class CarpoolInputActivity extends AppCompatActivity implements OnMapRead
     String destination;
     float distance;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,12 +86,9 @@ public class CarpoolInputActivity extends AppCompatActivity implements OnMapRead
         //         Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.confirmation_map);
+        assert mapFragment != null;
         mapFragment.getMapAsync(this);
 
-        /**
-         * Initialize Places. For simplicity, the API key is hard-coded. In a production
-         * environment we recommend using a secure mechanism to manage API keys.
-         */
         if (!Places.isInitialized()) {
             Places.initialize(getApplicationContext(), apiKey);
         }
@@ -113,21 +106,22 @@ public class CarpoolInputActivity extends AppCompatActivity implements OnMapRead
         // Getting place from search
         currentLocationSearch.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
-            public void onPlaceSelected(Place place) {
+            public void onPlaceSelected(@NonNull Place place) {
                 // TODO: Get info about the selected place.
 //                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId() + ", " + place.getLatLng() + ", " + place.getAddress());
                 currentLocation = place.getName();
 
                 // Use the Google Places API to fetch details about the place
                 PlacesClient placesClient = Places.createClient(getApplicationContext());
-                List<Place.Field> placeFields = Arrays.asList(Place.Field.LAT_LNG);
-                FetchPlaceRequest request = FetchPlaceRequest.newInstance(place.getId(), placeFields);
+                List<Place.Field> placeFields = Collections.singletonList(Place.Field.LAT_LNG);
+                FetchPlaceRequest request = FetchPlaceRequest.newInstance(Objects.requireNonNull(place.getId()), placeFields);
 
                 Task<FetchPlaceResponse> placeTask = placesClient.fetchPlace(request);
                 placeTask.addOnSuccessListener((response) -> {
                     // Get the place's LatLng coordinates
                     LatLng latLng = response.getPlace().getLatLng();
-                    Log.d(TAG, "Place coordinates: " + latLng.toString());
+                    assert latLng != null;
+                    Log.d(TAG, "Place coordinates: " + latLng);
                     currentCoordinates = latLng;
                     if (startMarker != null) {
                         startMarker.remove();
@@ -143,7 +137,7 @@ public class CarpoolInputActivity extends AppCompatActivity implements OnMapRead
             }
 
             @Override
-            public void onError(Status status) {
+            public void onError(@NonNull Status status) {
                 // TODO: Handle the error.
                 Log.i(TAG, "An error occurred: " + status);
 
@@ -151,19 +145,20 @@ public class CarpoolInputActivity extends AppCompatActivity implements OnMapRead
         });
         destinationSearch.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
-            public void onPlaceSelected(Place place) {
+            public void onPlaceSelected(@NonNull Place place) {
                 // TODO: Get info about the selected place.
                 destination = place.getName();
                 // Use the Google Places API to fetch details about the place
                 PlacesClient placesClient = Places.createClient(getApplicationContext());
-                List<Place.Field> placeFields = Arrays.asList(Place.Field.LAT_LNG);
-                FetchPlaceRequest request = FetchPlaceRequest.newInstance(place.getId(), placeFields);
+                List<Place.Field> placeFields = Collections.singletonList(Place.Field.LAT_LNG);
+                FetchPlaceRequest request = FetchPlaceRequest.newInstance(Objects.requireNonNull(place.getId()), placeFields);
 
                 Task<FetchPlaceResponse> placeTask = placesClient.fetchPlace(request);
                 placeTask.addOnSuccessListener((response) -> {
                     // Get the place's LatLng coordinates
                     LatLng latLng = response.getPlace().getLatLng();
-                    Log.d(TAG, "Place coordinates: " + latLng.toString());
+                    assert latLng != null;
+                    Log.d(TAG, "Place coordinates: " + latLng);
                     destinationCoordinates = latLng;
                     if (endMarker != null) {
                         endMarker.remove();
@@ -186,7 +181,7 @@ public class CarpoolInputActivity extends AppCompatActivity implements OnMapRead
             }
 
             @Override
-            public void onError(Status status) {
+            public void onError(@NonNull Status status) {
                 // TODO: Handle the error.
                 Log.i(TAG, "An error occurred: " + status);
             }
@@ -221,8 +216,10 @@ public class CarpoolInputActivity extends AppCompatActivity implements OnMapRead
             encryptionController.insertCarpool(carpool);
             encryptionController.insertCarpoolRef(carpoolUserCrossRef);
             System.out.println(encryptionController.getAllCarpool());
+            Toast.makeText(this, "Carpool created!", Toast.LENGTH_SHORT).show();
             finish();
         } else {
+            Toast.makeText(this, "Missing values in form!", Toast.LENGTH_SHORT).show();
             create.setError("Missing values in form!");
         }
 
@@ -313,14 +310,8 @@ public class CarpoolInputActivity extends AppCompatActivity implements OnMapRead
     }
 
     public boolean isValidCarpool(String currentLocation, String destination, Criteria criteria) {
-        boolean locationSelected = false;
-        if (currentLocation != null && destination != null) {
-            locationSelected = true;
-        }
-        boolean carTypeSelected = false;
-        if (criteria.isSuv() || criteria.isSedan() || criteria.isTruck() || criteria.isVan()) {
-            carTypeSelected = true;
-        }
+        boolean locationSelected = currentLocation != null && destination != null;
+        boolean carTypeSelected = criteria.isSuv() || criteria.isSedan() || criteria.isTruck() || criteria.isVan();
         return locationSelected && carTypeSelected;
 
     }

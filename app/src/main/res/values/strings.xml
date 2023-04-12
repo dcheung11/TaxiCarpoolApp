@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ScoopMe</string>
     <string name="title_activity_maps">MapsActivity</string>
-    <string name="homescreen_title">ScoopMe </string>
+    <string name="homescreen_title">ScoopMe</string>
     <string name="homescreen_profile">Profile</string>
     <string name="homescreen_arrive">Arrive</string>
     <string name="homescreen_create">Create Carpool</string>
