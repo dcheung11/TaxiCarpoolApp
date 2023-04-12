@@ -44,12 +44,20 @@ public class EncryptionController {
 
     public static void initialize(){
         UserIdentity user1 = new UserIdentity("Justin","Dang","123@gmail.com","123456");
-        UserIdentity damien = new UserIdentity("Damien","Cheung","d@@gmail.com","123456");
-        UserIdentity userForCarpool1 = new UserIdentity("guy","1","1@@gmail.com","123456");
-        UserIdentity userForCarpool2 = new UserIdentity("guy","2","2@@gmail.com","123456");
-        UserIdentity userForCarpool3 = new UserIdentity("guy","3","3@@gmail.com","123456");
-        UserIdentity userForCarpool4 = new UserIdentity("guy","4","4@@gmail.com","123456");
-        UserIdentity userForCarpool5 = new UserIdentity("guy","5","5@@gmail.com","123456");
+        user1.setUid(dao.insertUser(user1));
+        UserIdentity damien = new UserIdentity("Damien","Cheung","d@gmail.com","123456");
+        damien.setUid(dao.insertUser(damien));
+        UserIdentity userForCarpool1 = new UserIdentity("guy","1","1@gmail.com","123456");
+        userForCarpool1.setUid(dao.insertUser(userForCarpool1));
+        UserIdentity userForCarpool2 = new UserIdentity("guy","2","2@gmail.com","123456");
+        userForCarpool2.setUid(dao.insertUser(userForCarpool2));
+        UserIdentity userForCarpool3 = new UserIdentity("guy","3","3@gmail.com","123456");
+        userForCarpool3.setUid(dao.insertUser(userForCarpool3));
+        UserIdentity userForCarpool4 = new UserIdentity("guy","4","4@gmail.com","123456");
+        userForCarpool4.setUid(dao.insertUser(userForCarpool4));
+        UserIdentity userForCarpool5 = new UserIdentity("guy","5","5@gmail.com","123456");
+        userForCarpool5.setUid(dao.insertUser(userForCarpool5));
+
 
 
         Criteria van_pets = new Criteria(false,false,false,true,false,true);
@@ -75,13 +83,12 @@ public class EncryptionController {
         CarpoolUserCrossRef crossRef3 = new CarpoolUserCrossRef(itb_lazeez_3, userForCarpool3);
         CarpoolUserCrossRef crossRef4 = new CarpoolUserCrossRef(itb_lazeez_4, userForCarpool4);
         CarpoolUserCrossRef crossRef5 = new CarpoolUserCrossRef(itb_lazeez_5, userForCarpool5);
+        CarpoolUserCrossRef crossRef6 = new CarpoolUserCrossRef(itb_lazeez_1, userForCarpool2);
+        CarpoolUserCrossRef crossRef7 = new CarpoolUserCrossRef(itb_lazeez_1, userForCarpool3);
+        CarpoolUserCrossRef crossRef8 = new CarpoolUserCrossRef(itb_lazeez_1, userForCarpool4);
 
-        dao.insertUser(user1);
-        dao.insertUser(damien);
-        dao.insertUser(userForCarpool1);
-        dao.insertUser(userForCarpool2);
-        dao.insertUser(userForCarpool3);
-        dao.insertUser(userForCarpool4);
+
+
         dao.insertCarpool(itb_lazeez_1);
         dao.insertCarpool(itb_lazeez_2);
         dao.insertCarpool(itb_lazeez_3);
@@ -92,6 +99,10 @@ public class EncryptionController {
         dao.insertCarpoolUserRef(crossRef3);
         dao.insertCarpoolUserRef(crossRef4);
         dao.insertCarpoolUserRef(crossRef5);
+        dao.insertCarpoolUserRef(crossRef6);
+        dao.insertCarpoolUserRef(crossRef7);
+        dao.insertCarpoolUserRef(crossRef8);
+
 
     }
 
@@ -161,5 +172,6 @@ public class EncryptionController {
 
         return decryptedString;
     }
+    
 
 }

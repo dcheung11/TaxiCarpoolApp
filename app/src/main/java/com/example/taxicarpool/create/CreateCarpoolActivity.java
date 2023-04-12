@@ -45,7 +45,7 @@ public class CreateCarpoolActivity extends AppCompatActivity {
     public void handleSubmit(View v){
         System.out.println("Ok");
         String s = taxi_id_input.getText().toString();
-        Intent intent = new Intent(this, SelectAddressActivity.class);
+        Intent intent = new Intent(this, CarpoolInputActivity.class);
 
 //        Intent intent = new Intent(this, MapsActivity.class);
         if (isValidId()) {
@@ -53,14 +53,13 @@ public class CreateCarpoolActivity extends AppCompatActivity {
             intent.putExtra("MY_STRING_EXTRA", s);
             startActivity(intent);
         }
+        finish();
 
 
 
     }
 
     boolean isValidId(){
-        String s = taxi_id_input.getText().toString();
-
         if (isEmpty(taxi_id_input) ){
             taxi_id_input.setError("Taxi ID Required");
 //            System.out.println(s + " is INVALID ");
