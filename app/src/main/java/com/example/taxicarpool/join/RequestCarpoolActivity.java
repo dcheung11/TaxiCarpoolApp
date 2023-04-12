@@ -59,7 +59,6 @@ public class RequestCarpoolActivity extends AppCompatActivity {
         Intent i = new Intent(this, SearchResultsActivity.class);
 
         Bundle bundle = i.getExtras();
-
         i.putExtra("Current Location", currentLoc);
         i.putExtra("Destination Location", destinationLoc);
         i.putExtra("SUV Criteria", checkbox_suv.isChecked());

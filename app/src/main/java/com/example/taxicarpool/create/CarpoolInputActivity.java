@@ -193,7 +193,6 @@ public class CarpoolInputActivity extends AppCompatActivity implements OnMapRead
         if (i != null && i.hasExtra("MY_STRING_EXTRA")) {
             matchId = i.getStringExtra("MY_STRING_EXTRA");
             text_match_id.setText("Match ID: " + matchId);
-
         }
         suv = findViewById(R.id.radio_suv);
         sedan = findViewById(R.id.radio_sedan);

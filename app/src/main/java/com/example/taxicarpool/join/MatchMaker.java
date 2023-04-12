@@ -54,14 +54,17 @@ public class MatchMaker {
     }
     // Get the filtered carpool results based on the search query
     public List<Carpool> getCarpoolSearchResults(String currentLocation, String destination, Criteria criteria) throws Exception {
+        System.out.println("curr: " + currentLocation);
         List<Carpool> allCarpools = EncryptionController.getInstance(context).getAllCarpool();
+        allCarpools.forEach(x -> System.out.println(x.getCurrentLocation()));
         List<Carpool> filteredCarpools = allCarpools.stream()
                 .filter(carpool ->
-                        carpool.getCurrentLocation() == currentLocation &&
-                                carpool.getDestination() == destination &&
+                        carpool.getCurrentLocation().equals( currentLocation) &&
+                                carpool.getDestination().equals(destination) &&
                                 isCarpoolMatch(carpool.getCriteria(), criteria)
                         )
                 .collect(Collectors.toList());
+        System.out.println(filteredCarpools.size());
         return filteredCarpools;
     }
 

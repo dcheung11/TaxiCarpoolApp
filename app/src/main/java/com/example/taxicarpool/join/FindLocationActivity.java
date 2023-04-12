@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.taxicarpool.BuildConfig;
 import com.example.taxicarpool.R;
 import com.example.taxicarpool.data.Carpool;
 import com.example.taxicarpool.data.CarpoolUserCrossRef;
@@ -27,7 +28,7 @@ public class FindLocationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_location);
-        String apiKey = getString(R.string.maps_key);
+        String apiKey = BuildConfig.MAPS_API_KEY;
 
         /**
          * Initialize Places. For simplicity, the API key is hard-coded. In a production
@@ -40,7 +41,7 @@ public class FindLocationActivity extends AppCompatActivity {
         currentLocation = findViewById(R.id.requesterLocation);
 
         destination = findViewById(R.id.requesterDestination);
-
+        System.out.println();
         currentLoc = currentLocation.getText().toString();
         destinationLoc = destination.getText().toString();
 

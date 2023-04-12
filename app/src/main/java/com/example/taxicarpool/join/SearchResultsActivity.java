@@ -29,6 +29,7 @@ public class SearchResultsActivity extends AppCompatActivity {
         MatchMaker matchmaker = new MatchMaker(this);
         Intent i = getIntent();
         Bundle bundle = i.getExtras();
+        System.out.println("bundle"+ bundle.getString("Current Location") + bundle.getString("Destination Location"));
 
 
         Criteria criteria = new Criteria(bundle.getBoolean("SUV Criteria"), bundle.getBoolean("Sedan Criteria"), bundle.getBoolean("Truck Criteria"), bundle.getBoolean("Van Criteria"), bundle.getBoolean("Gender Criteria"), bundle.getBoolean("Pets Criteria"));
