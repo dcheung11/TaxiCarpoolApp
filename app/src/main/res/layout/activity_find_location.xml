@@ -4,45 +4,4 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".join.FindLocationActivity">
-
-    <EditText
-        android:id="@+id/requesterDestination"
-        android:layout_width="305dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="340dp"
-        android:ems="10"
-        android:hint="Destination"
-        android:inputType="textPostalAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/requesterLocation"
-        android:layout_width="305dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="120dp"
-        android:ems="10"
-        android:hint="Current Location"
-        android:inputType="textPostalAddress"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:layout_marginEnd="160dp"
-        android:layout_marginBottom="168dp"
-        android:onClick="handleSubmit"
-        android:text="Submit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vehicle_group" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    tools:context=".join.FindLocationActivity"/>

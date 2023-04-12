@@ -18,7 +18,7 @@ public class JoinCarpoolActivity extends AppCompatActivity {
     }
 
     public void getLocation(View V){
-        Intent i = new Intent(this, FindLocationActivity.class);
+        Intent i = new Intent(this, RequestCarpoolActivity.class);
         startActivity(i);
     }
 

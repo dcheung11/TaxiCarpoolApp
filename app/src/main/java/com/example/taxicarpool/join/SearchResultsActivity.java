@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.service.autofill.FieldClassification;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.taxicarpool.R;
 import com.example.taxicarpool.data.Carpool;
@@ -30,11 +31,18 @@ public class SearchResultsActivity extends AppCompatActivity {
 
 
         Criteria criteria = new Criteria(bundle.getBoolean("SUV Criteria"), bundle.getBoolean("Sedan Criteria"), bundle.getBoolean("Truck Criteria"), bundle.getBoolean("Van Criteria"), bundle.getBoolean("Gender Criteria"), bundle.getBoolean("Pets Criteria"));
-        searchResults = matchmaker.getCarpoolSearchResults(bundle.getString("Current Location"), bundle.getString("Destination Location"), criteria);
+        try {
+            searchResults = matchmaker.getCarpoolSearchResults(bundle.getString("Current Location"), bundle.getString("Destination Location"), criteria);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        if (searchResults.size() <= 0) {
+            ((TextView) findViewById(R.id.carpoolResult)).setText("No matches found, please try again later or create your own carpool");
 
+        } else {
+            ((TextView) findViewById(R.id.carpoolResult)).setText(Long.toString(searchResults.get(0).matchId));
 
-        
-
+        }
     }
 
     public void returnToJoin(View V){
