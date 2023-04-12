@@ -14,16 +14,7 @@ public class JoinCarpoolActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_carpool);
-    }
 
-    public void launchCriteriaSelection(View V){
-        Intent i = new Intent(this, SelectCriteriaActivity.class);
-        startActivity(i);
-    }
-
-    public void launchSearchResults(View v) {
-        Intent i = new Intent(this, SearchResultsActivity.class);
-        startActivity(i);
     }
 
     public void getLocation(View V){

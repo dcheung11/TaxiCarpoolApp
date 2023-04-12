@@ -12,6 +12,9 @@ import com.example.taxicarpool.R;
 import com.example.taxicarpool.join.JoinCarpoolActivity;
 import com.example.taxicarpool.join.Criteria;
 
+
+
+
 public class SelectCriteriaActivity extends AppCompatActivity {
 
     CheckBox checkbox_suv;
@@ -40,24 +43,30 @@ public class SelectCriteriaActivity extends AppCompatActivity {
     }
 
     // This function is invoked when the button is pressed.
-    public void returnToSearch(View V){
-        String msg="";
+    public void goToResults(View V){
 
-
-        // isChecked() is used to check whether
-        // the CheckBox is in true state or not.
-
-        Criteria critera = new Criteria(checkbox_suv.isChecked(), checkbox_sedan.isChecked(), checkbox_truck.isChecked(), checkbox_van.isChecked(), checkbox_gender.isChecked(), checkbox_pets.isChecked());
+        Criteria criteria = new Criteria(checkbox_suv.isChecked(), checkbox_sedan.isChecked(), checkbox_truck.isChecked(), checkbox_van.isChecked(), checkbox_gender.isChecked(), checkbox_pets.isChecked());
 
 
 
-        // Toast is created to display the
-        // message using show() method.
-        Toast.makeText(this, msg + "are selected",
-                Toast.LENGTH_LONG).show();
 
-        Intent i = new Intent(this, JoinCarpoolActivity.class);
+        Intent i = new Intent(this, SearchResultsActivity.class);
+
+        Bundle bundle = i.getExtras();
+
+        i.putExtra("Current Location", bundle.getString("Current Location"));
+        i.putExtra("Destination Location", bundle.getString("Destination Location"));
+        i.putExtra("SUV Criteria", checkbox_suv.isChecked());
+        i.putExtra("Sedan Criteria", checkbox_sedan.isChecked());
+        i.putExtra("Truck Criteria", checkbox_truck.isChecked());
+        i.putExtra("Van Criteria", checkbox_van.isChecked());
+        i.putExtra("Gender Criteria", checkbox_gender.isChecked());
+        i.putExtra("Pets Criteria", checkbox_pets.isChecked());
+
         startActivity(i);
+
+
+
     }
 
 }

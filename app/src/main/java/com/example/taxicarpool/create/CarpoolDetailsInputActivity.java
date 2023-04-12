@@ -16,6 +16,7 @@ import com.example.taxicarpool.data.Carpool;
 import com.example.taxicarpool.data.CarpoolUserCrossRef;
 import com.example.taxicarpool.data.EncryptionController;
 import com.example.taxicarpool.join.Criteria;
+import com.google.android.libraries.places.api.Places;
 
 public class CarpoolDetailsInputActivity extends AppCompatActivity  {
 
@@ -41,24 +42,14 @@ public class CarpoolDetailsInputActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_carpool_details_input);
-        Intent i = getIntent();
-        textview_match_id = findViewById(R.id.textview_match_id);
-        if (i != null && i.hasExtra("MY_STRING_EXTRA")) {
-            matchId = i.getStringExtra("MY_STRING_EXTRA");
-            textview_match_id.setText("Match ID: " + matchId);
+        String apiKey = getString(R.string.maps_key);
 
-        }
-        currentLocation = findViewById(R.id.currentLocation);
-        destination = findViewById(R.id.destination);
-        suv = findViewById(R.id.radio_suv);
-        sedan = findViewById(R.id.radio_sedan);
-        truck = findViewById(R.id.radio_truck);
-        van = findViewById(R.id.radio_van);
-
-        gender = findViewById(R.id.checkbox_gender);
-        pets = findViewById(R.id.checkBox_pets);
-
-        button_create = findViewById(R.id.button_create);
+        /**
+         * Initialize Places. For simplicity, the API key is hard-coded. In a production
+         * environment we recommend using a secure mechanism to manage API keys.
+         */
+        if (!Places.isInitialized()) {
+            Places.initialize(getApplicationContext(), apiKey);
 
     }
 
