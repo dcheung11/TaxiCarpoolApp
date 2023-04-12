@@ -9,6 +9,7 @@ import com.example.taxicarpool.data.CarpoolWithRiders;
 import com.example.taxicarpool.data.EncryptionController;
 import com.example.taxicarpool.data.RiderWithCarpools;
 import com.example.taxicarpool.data.UserIdentity;
+import com.google.android.material.snackbar.Snackbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -93,7 +94,13 @@ public class RatePassengers extends AppCompatActivity {
                 ((Button) findViewById(R.id.button6)).setText(" ");
             }
             else {
-
+                ((Button) findViewById(R.id.button)).setText(" ");
+                ((Button) findViewById(R.id.button3)).setText(" ");
+                ((Button) findViewById(R.id.button4)).setText(" ");
+                ((Button) findViewById(R.id.button5)).setText(" ");
+                ((Button) findViewById(R.id.button6)).setText(" ");
+                Snackbar snackbar = Snackbar.make(findViewById(R.id.ratePassengers),"No other riders in this Carpool", Snackbar.LENGTH_LONG);
+                snackbar.show();
             }
 
     }
