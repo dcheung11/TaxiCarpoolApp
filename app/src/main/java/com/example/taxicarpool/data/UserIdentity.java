@@ -22,19 +22,28 @@ public class UserIdentity {
 
     public int rating;
 
+    public String gender;
+
     @Ignore
     public UserIdentity(String firstName, String lastName, String email, String password) {
-        this(0L,firstName,lastName,email,password);
+        this(0L,firstName,lastName,email,password,"M");
+    }
+
+    @Ignore
+    public UserIdentity(String firstName, String lastName, String email, String password, String gender) {
+        this(0L,firstName,lastName,email,password,gender);
     }
 
 
-    public UserIdentity(Long uid, String firstName, String lastName, String email, String password) {
+
+    public UserIdentity(Long uid, String firstName, String lastName, String email, String password, String gender) {
         this.uid = uid;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.rating = 5;
+        this.gender =  gender;
     }
 
 
@@ -100,6 +109,14 @@ public class UserIdentity {
         return Objects.hash(uid);
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     @Override
     public String toString() {
         return "UserIdentity{" +
@@ -108,6 +125,8 @@ public class UserIdentity {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", rating=" + rating +
+                ", gender='" + gender + '\'' +
                 '}';
     }
 }

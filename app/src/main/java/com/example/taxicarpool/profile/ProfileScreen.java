@@ -20,6 +20,7 @@ public class ProfileScreen extends AppCompatActivity {
     TextView lastName;
     TextView email;
     TextView rating;
+    TextView gender;
     UserIdentity user;
 
     @Override
@@ -31,6 +32,7 @@ public class ProfileScreen extends AppCompatActivity {
         lastName = findViewById(R.id.profile_screen_last_name);
         email = findViewById(R.id.profile_screen_email);
         rating = findViewById(R.id.profile_screen_rating);
+        gender = findViewById(R.id.profile_screen_gender);
         setDetails();
     }
 
@@ -50,6 +52,8 @@ public class ProfileScreen extends AppCompatActivity {
         email.setText(field3);
         String field4 = "Rating: " + user.getRating();
         rating.setText(field4);
+        String field5 = "Gender: " + user.getGender();
+        gender.setText(field5);
 
     }
 

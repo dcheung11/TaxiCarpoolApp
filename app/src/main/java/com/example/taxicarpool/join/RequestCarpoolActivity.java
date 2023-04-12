@@ -5,17 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.Toast;
+import android.widget.EditText;
 
 import com.example.taxicarpool.R;
-import com.example.taxicarpool.join.JoinCarpoolActivity;
-import com.example.taxicarpool.join.Criteria;
 
-
-
-
-public class SelectCriteriaActivity extends AppCompatActivity {
+public class RequestCarpoolActivity extends AppCompatActivity {
 
     CheckBox checkbox_suv;
     CheckBox checkbox_sedan;
@@ -23,11 +19,16 @@ public class SelectCriteriaActivity extends AppCompatActivity {
     CheckBox checkbox_van;
     CheckBox checkbox_gender;
     CheckBox checkbox_pets;
+    EditText currentLocation;
+    EditText destination;
+    Button submit;
+    String currentLoc;
+    String destinationLoc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_criteria);
+        setContentView(R.layout.activity_request_carpool);
         checkbox_suv = (CheckBox) findViewById(R.id.checkbox_suv);
         checkbox_suv.setChecked(true);
         checkbox_sedan = (CheckBox) findViewById(R.id.checkbox_sedan);
@@ -36,26 +37,30 @@ public class SelectCriteriaActivity extends AppCompatActivity {
         checkbox_truck.setChecked(true);
         checkbox_van = (CheckBox) findViewById(R.id.checkbox_van);
         checkbox_van.setChecked(true);
-        checkbox_gender = (CheckBox) findViewById(R.id.checkbox_gender);
+        checkbox_gender = (CheckBox) findViewById(R.id.checkbox_gender2);
         checkbox_gender.setChecked(false);
         checkbox_pets = (CheckBox) findViewById(R.id.checkbox_pets);
         checkbox_pets.setChecked(false);
     }
 
-    // This function is invoked when the button is pressed.
+
+
     public void goToResults(View V){
 
         Criteria criteria = new Criteria(checkbox_suv.isChecked(), checkbox_sedan.isChecked(), checkbox_truck.isChecked(), checkbox_van.isChecked(), checkbox_gender.isChecked(), checkbox_pets.isChecked());
 
+        currentLocation = findViewById(R.id.requesterLocation);
 
+        destination = findViewById(R.id.requesterDestination);
 
+        currentLoc = currentLocation.getText().toString();
+        destinationLoc = destination.getText().toString();
 
         Intent i = new Intent(this, SearchResultsActivity.class);
 
         Bundle bundle = i.getExtras();
-
-        i.putExtra("Current Location", (String) bundle.get("Current Location"));
-        i.putExtra("Destination Location", (String) bundle.get("Destination Location"));
+        i.putExtra("Current Location", currentLoc);
+        i.putExtra("Destination Location", destinationLoc);
         i.putExtra("SUV Criteria", checkbox_suv.isChecked());
         i.putExtra("Sedan Criteria", checkbox_sedan.isChecked());
         i.putExtra("Truck Criteria", checkbox_truck.isChecked());
@@ -64,8 +69,6 @@ public class SelectCriteriaActivity extends AppCompatActivity {
         i.putExtra("Pets Criteria", checkbox_pets.isChecked());
 
         startActivity(i);
-
-
 
     }
 

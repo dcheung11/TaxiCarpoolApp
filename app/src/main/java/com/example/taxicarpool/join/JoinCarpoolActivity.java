@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.taxicarpool.R;
+import com.example.taxicarpool.join.FindLocationActivity;
 
 public class JoinCarpoolActivity extends AppCompatActivity {
 
@@ -14,20 +15,11 @@ public class JoinCarpoolActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_carpool);
-    }
 
-    public void launchCriteriaSelection(View V){
-        Intent i = new Intent(this, SelectCriteriaActivity.class);
-        startActivity(i);
-    }
-
-    public void launchSearchResults(View v) {
-        Intent i = new Intent(this, SearchResultsActivity.class);
-        startActivity(i);
     }
 
     public void getLocation(View V){
-        Intent i = new Intent(this, FindLocationActivity.class);
+        Intent i = new Intent(this, RequestCarpoolActivity.class);
         startActivity(i);
     }
 

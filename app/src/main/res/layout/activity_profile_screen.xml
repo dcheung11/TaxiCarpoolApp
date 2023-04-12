@@ -47,34 +47,34 @@
         android:id="@+id/profile_screen_logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="120dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="84dp"
         android:onClick="logoff"
         android:text="@string/profile_screen_logout_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/profile_screen_delete_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="120dp"
-        android:onClick="delete"
-        android:text="@string/profile_screen_delete_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/profile_screen_logout_button" />
-
-    <Button
         android:id="@+id/profile_screen_edit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="120dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="84dp"
         android:onClick="edit"
         android:text="@string/profile_screen_edit_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/profile_screen_delete_button" />
+
+    <Button
+        android:id="@+id/profile_screen_delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="84dp"
+        android:onClick="delete"
+        android:text="@string/profile_screen_delete_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/profile_screen_logout_button" />
 
     <TextView
         android:id="@+id/profile_screen_rating"
@@ -86,5 +86,16 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_screen_email" />
+
+    <TextView
+        android:id="@+id/profile_screen_gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="52dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile_screen_rating" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
